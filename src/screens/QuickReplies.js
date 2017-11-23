@@ -6,13 +6,12 @@ import {KeyboardAccessoryView, KeyboardUtils, KeyboardRegistry} from 'react-nati
 
 
 import "./ReplySelector";
-import "./ReplysEditor";
+import "./RepliesEditor";
 
+import * as store from '../stores/replies/replies.store';
+import * as actions from '../stores/replies/replies.actions';
 
-import * as store from '../stores/replys/replys.store';
-import * as actions from '../stores/replys/replys.actions';
-
-class QuickReplys extends PureComponent {
+class QuickReplies extends PureComponent {
     
     constructor(props){
         super(props);
@@ -22,7 +21,7 @@ class QuickReplys extends PureComponent {
             customKeyboard: {
                 component: undefined,
                 initialProps: undefined,
-              },
+            },
             receivedKeyboardData: undefined,
         }
     }
@@ -35,9 +34,9 @@ class QuickReplys extends PureComponent {
         this.setState({customKeyboard: {}});
     }
 
-    openReplysEditor = () => {
-        console.log('taking you to the ReplysEdit screen');        
-        this.showKeyboardView('ReplysEditor')
+    openRepliesEditor = () => {
+        console.log('taking you to the repliesEditor screen');        
+        this.showKeyboardView('repliesEditor',{ test: "test"})
     };
 
     keyboardToolbarContent = () => {
@@ -51,7 +50,7 @@ class QuickReplys extends PureComponent {
                 <Button center
                     testID="action1"
                     label="Choose a quick reply"
-                    onPress={() => this.showKeyboardView('ReplySelector')}
+                    onPress={() => this.showKeyboardView('replySelector')}
                     size="small"
                     fullWidth={true}
                 />
@@ -80,7 +79,7 @@ class QuickReplys extends PureComponent {
                     kbComponent={this.state.customKeyboard.component}
                     kbInitialProp={this.state.customKeyboard.initialProps}
                     kbInputRef={this.textInputRef}
-                    onItemSelected={this.openReplysEditor}
+                    onItemSelected={this.openRepliesEditor}
                 />
             </View>
         );
@@ -100,4 +99,4 @@ function mapStateToProps() {
     };
 }
 
-export default connect(mapStateToProps)(QuickReplys);
+export default connect(mapStateToProps)(QuickReplies);

@@ -1,8 +1,8 @@
 import {Navigation} from 'react-native-navigation';
 
-import QuickReplys from './QuickReplys';
+import QuickReplies from './QuickReplies';
 
 
 export function registerScreens(store) {
-    Navigation.registerComponent('QuickReplys', () => QuickReplys);
+    Navigation.registerComponent('QuickReplies', () => QuickReplies);
 }

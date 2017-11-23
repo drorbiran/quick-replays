@@ -35,6 +35,10 @@ export const getters = remx.getters({
         return state.selectedReply;
     },
 
+    getReplies(){
+        return state.replies;
+    }
+
 });
 
 //#####################################

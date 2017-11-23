@@ -5,18 +5,21 @@ import {View, Text, Button, Colors} from 'react-native-ui-lib';
 import { connect } from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 
-class ReplysEditor extends PureComponent {
+class repliesEditor extends PureComponent {
     
-    componentWillMount(){
-      KeyboardRegistry.toggleExpandedKeyboard('ReplysEditor')
+    componentDidMount(){
+      KeyboardRegistry.toggleExpandedKeyboard('repliesEditor')
     }
   
     render() {
-        console.log('rendering replysEditor');
+        console.log('rendering repliesEditor');
         
         return (
-          <View style={styles.container} testID="ReplysEditor" >
-            <View flex bottom centerH>
+          <View style={styles.container} testID="repliesEditor" >
+            <View>
+              <Text> The replies will be here </Text>
+            </View>
+            <View center>
               <Button green40
                 label="Add"
                 size="medium"
@@ -48,8 +51,8 @@ class ReplysEditor extends PureComponent {
 const styles ={
     container: {
       flex: 1,
-      backgroundColor: '#F5FCFF',
+      backgroundColor: '#red',
     },
   };
 
-  KeyboardRegistry.registerKeyboard('ReplysEditor', () => ReplysEditor);
+  KeyboardRegistry.registerKeyboard('repliesEditor', () => repliesEditor);

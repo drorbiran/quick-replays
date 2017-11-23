@@ -5,21 +5,26 @@ import {View, Text, Button, Colors} from 'react-native-ui-lib';
 import { connect } from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 
+import * as stores from '../stores/replies/replies.store'
 
-
-class ReplySelector extends PureComponent {
+class replySelector extends PureComponent {
     
   onButtonPress = () => {
     console.log('edit button was pressed');
-    KeyboardRegistry.onItemSelected('ReplySelector');
+    KeyboardRegistry.onItemSelected('replySelector');
   }
+
+  renderReplies= () => {
+      return (
+        <Text>Replies will be here</Text>
+      )
+  }
+
   
   render() {
         return (
-          <View style={styles.container} testID="ReplySelector" >
-            <Text text70>
-              ReplysSelector
-            </Text>
+          <View style={styles.container} testID="replySelector" >
+            {this.renderReplies()}
             <Button blue40 bottom
               label="edit"
               size="medium"
@@ -27,7 +32,7 @@ class ReplySelector extends PureComponent {
               outlineColor='#57a8ef'
               style={{marginBottom: 20}}
               onPress={this.onButtonPress}
-              testID="editReplaysButton"
+              testID="editRepliesButton"
             />
           </View>
         );
@@ -41,6 +46,14 @@ const styles ={
       alignItems: 'center',
       backgroundColor: '#F5FCFF',
     },
-  }; 
+  };
+ 
+function mapStateToProps(){
+  return {
+    replies: [1,2,3]
+  }
+}
+  
+connect(mapStateToProps)(replySelector);
 
-KeyboardRegistry.registerKeyboard('ReplySelector', () => ReplySelector);
+KeyboardRegistry.registerKeyboard('replySelector', () => replySelector);
