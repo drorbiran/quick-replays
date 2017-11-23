@@ -12,7 +12,7 @@ registerScreens();
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'QuickReplays',
-    title: 'Quick Replays'
+    screen: 'QuickReplys',
+    title: 'Quick Replys'
   }
 });

@@ -1,11 +1,11 @@
 import * as remx from 'remx';
 
 const initialState = {
-    selectedReplay: {
-        title: "initial replay",
-        description: "Please selet a replay"
+    selectedReply: {
+        title: "initial reply",
+        description: "Please select a reply"
     },
-    replays: [
+    replies: [
         {
             title: "Greeting",
             description: "Hi there, I'm here to chat if you have any questions."
@@ -31,8 +31,8 @@ const state = remx.state(initialState);
 
 export const getters = remx.getters({
 
-    getSelectedReplay(){
-        return state.selectedReplay;
+    getSelectedReply(){
+        return state.selectedReply;
     },
 
 });
@@ -44,8 +44,8 @@ export const getters = remx.getters({
 //#####################################
 export const setters = remx.setters({
 
-    setSelectedReplay(replay){
-      state.selectedReplay = replay;
+    setSelectedReply(reply){
+      state.selectedReply = reply;
     }
 
 });
