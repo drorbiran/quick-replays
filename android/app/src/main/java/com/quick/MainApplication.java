@@ -1,4 +1,4 @@
-package com.remxrnnuilibbootstrap;
+package com.quick;
 
 import android.support.annotation.NonNull;
 

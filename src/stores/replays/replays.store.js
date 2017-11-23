@@ -1,8 +1,24 @@
 import * as remx from 'remx';
 
 const initialState = {
-    loading: true,
-    topics: [],
+    selectedReplay: {
+        title: "initial replay",
+        description: "Please selet a replay"
+    },
+    replays: [
+        {
+            title: "Greeting",
+            description: "Hi there, I'm here to chat if you have any questions."
+        },
+        {
+            title: "Bye",
+            description: "Thank you for dropping by"
+        },
+        {
+            title: "Getting leads",
+            description: "We have 30% sale this week, leave me your email and I'll get back to you with the details."
+        },
+    ]
 };
 
 const state = remx.state(initialState);
@@ -15,12 +31,8 @@ const state = remx.state(initialState);
 
 export const getters = remx.getters({
 
-    isLoading() {
-        return state.loading;
-    },
-
-    getTopics(){
-        return state.topics;
+    getSelectedReplay(){
+        return state.selectedReplay;
     },
 
 });
@@ -32,12 +44,8 @@ export const getters = remx.getters({
 //#####################################
 export const setters = remx.setters({
 
-    setTopics(topics){
-      state.topics = topics;
-    },
-
-    setLoading(isLoading) {
-        state.loading = isLoading;
-    },
+    setSelectedReplay(replay){
+      state.selectedReplay = replay;
+    }
 
 });
