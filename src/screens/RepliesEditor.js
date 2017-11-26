@@ -23,6 +23,7 @@ class RepliesEditor extends PureComponent {
           title= {title}
           description = {description}
           onTitleChange={this.onTitleChange}
+          onDescriptionChange={this.onDescriptionChange}
           itemKey={key}
           key={key}
         />
@@ -31,6 +32,10 @@ class RepliesEditor extends PureComponent {
 
     onTitleChange = (newTitle, key) => {
       repliesStore.setters.setReplyTitle(key, newTitle);
+    }
+
+    onDescriptionChange = (newDescription, key) => {
+      repliesStore.setters.setReplyDescription(key, newDescription);      
     }
   
     render() {   

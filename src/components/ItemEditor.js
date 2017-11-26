@@ -6,6 +6,7 @@ class ItemEditor extends PureComponent {
         title: PropTypes.string,
         description: PropTypes.string,
         onTitleChange: PropTypes.func,
+        onDescriptionChange: PropTypes.func,
         itemKey: PropTypes.string
     };
 
@@ -22,7 +23,7 @@ class ItemEditor extends PureComponent {
                     placeholder = "Add your click reply content"
                     multiline
                     value={this.props.description}
-                    onChangeText={(text) => console.log('TBD')}
+                    onChangeText={(newDescription) => this.props.onDescriptionChange(newDescription,this.props.itemKey)}
                     blurOnSubmit={true}
                     maxLength={420}
                 />          

@@ -56,7 +56,7 @@ export const setters = remx.setters({
     },
 
     setReplyTitle(key,newTitle){
-        const newReplies = state.replies.map((reply) => {
+        state.replies = state.replies.map((reply) => {
             if (reply.key !== key) {
                 return reply
             } else {
@@ -65,8 +65,20 @@ export const setters = remx.setters({
                     ...{title: newTitle}
                 }
             }
+        }) 
+    },
+
+    setReplyDescription(key,newDescription){
+        state.replies = state.replies.map((reply) => {
+            if (reply.key !== key) {
+                return reply
+            } else {
+                return {
+                    ...reply,
+                    ...{description: newDescription}
+                }
+            }
         })
-        state.replies = newReplies; 
     }
 
 });
