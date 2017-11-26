@@ -8,7 +8,7 @@ import {KeyboardRegistry} from 'react-native-keyboard-input';
 class repliesEditor extends PureComponent {
     
     componentDidMount(){
-      KeyboardRegistry.toggleExpandedKeyboard('repliesEditor')
+      KeyboardRegistry.toggleExpandedKeyboard('repliesEditor');              
     }
   
     render() {
