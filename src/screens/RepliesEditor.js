@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
-import { ScrollView, Keyboard } from 'react-native'
+import { ScrollView } from 'react-native'
 import {View, Text, Button, Colors} from 'react-native-ui-lib';
+import ItemEditor from '../components/ItemEditor'
 
 import { connect } from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 
 import * as repliesStore from '../stores/replies/replies.store';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
+
 class RepliesEditor extends PureComponent {
     
     onCancelPress = () => {
@@ -18,7 +20,10 @@ class RepliesEditor extends PureComponent {
         return (
           <View style={styles.container} testID="repliesEditor" >
             <View>
-              <Text> The replies will be here </Text>
+              <ItemEditor
+                title="bla bla"
+                description="test description"
+              />
             </View>
             <View center>
               <Button green40
