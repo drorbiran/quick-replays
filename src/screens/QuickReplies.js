@@ -8,67 +8,40 @@ import {KeyboardAccessoryView, KeyboardUtils, KeyboardRegistry} from 'react-nati
 import "./ReplySelector";
 import "./RepliesEditor";
 
-import * as store from '../stores/replies/replies.store';
+import * as repliesStore from '../stores/replies/replies.store';
+import * as keyboardStore from '../stores/keyboard/keyboard.store';
 import * as actions from '../stores/replies/replies.actions';
 
 class QuickReplies extends PureComponent {
-    
-    constructor(props){
-        super(props);
-        
-        this.state = {
-            textValue: "",
-            customKeyboard: {
-                component: undefined,
-                initialProps: undefined,
-            },
-            receivedKeyboardData: undefined,
-        }
-    }
-
-    componentWillMount(){
-        
-    }
-
-    resetKeyboardView() {
-        this.setState({customKeyboard: {}});
-    }
-
-    openRepliesEditor = () => {
-        console.log('taking you to the repliesEditor screen');        
-        this.showKeyboardView('repliesEditor',{ test: "test"})
-    };
 
     keyboardToolbarContent = () => {
         return (
-            <View style={styles.ToolbarContainer} bottom background-dark80>
+            <View bottom background-dark80>
                 <TextInput
                     placeholder="Type Your Message"
-                    onFocus={() => this.resetKeyboardView()}
+                    onFocus={() => keyboardStore.setters.setKeyboardScreen(undefined)}
                     ref={r => this.textInputRef = r}
                 />
                 <Button center
                     testID="action1"
                     label="Choose a quick reply"
-                    onPress={() => this.showKeyboardView('replySelector')}
+                    onPress={() => keyboardStore.setters.setKeyboardScreen('ReplySelector')}
                     size="small"
                     fullWidth={true}
                 />
             </View>
         )
-      }
+    }
 
-    showKeyboardView = (component, props) => {
-        console.log('changing view');
-        this.setState({
-        customKeyboard: {
-            component,
-            initialProps: props,
-        },
-        });
+    onKeyboardItemSelected = (keyboardId, params) => {
+        this.props.navigator.showModal({
+            screen: 'RepliesEditor',
+            title: 'Edit Replies'
+        })
     }
  
     render() {
+        console.log('rendering QuickReplies screen');
         return (
             <View flex paddingH-25 paddingT-120>
                 <Text center dark10 text60>
@@ -76,26 +49,19 @@ class QuickReplies extends PureComponent {
                 </Text>
                 <KeyboardAccessoryView
                     renderContent={this.keyboardToolbarContent}
-                    kbComponent={this.state.customKeyboard.component}
-                    kbInitialProp={this.state.customKeyboard.initialProps}
+                    kbComponent={this.props.keyBoardScreen}
                     kbInputRef={this.textInputRef}
-                    onItemSelected={this.openRepliesEditor}
+                    onItemSelected={this.onKeyboardItemSelected}
                 />
             </View>
         );
     }
 }
 
-const IsIOS = Platform.OS === 'ios';
-const styles = {
-    ToolbarContainer : {
-        
-    }
-}
-
 function mapStateToProps() {
     return {
-        selectedReply: store.getters.getSelectedReply()
+        selectedReply: repliesStore.getters.getSelectedReply(),
+        keyBoardScreen: keyboardStore.getters.getKeyboardScreen()
     };
 }
 

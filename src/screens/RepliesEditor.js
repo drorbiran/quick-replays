@@ -1,19 +1,15 @@
 import React, { PureComponent } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, Keyboard } from 'react-native'
 import {View, Text, Button, Colors} from 'react-native-ui-lib';
 
 import { connect } from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 
-class repliesEditor extends PureComponent {
+import * as repliesStore from '../stores/replies/replies.store';
+import * as keyboardStore from '../stores/keyboard/keyboard.store';
+class RepliesEditor extends PureComponent {
     
-    componentDidMount(){
-      KeyboardRegistry.toggleExpandedKeyboard('repliesEditor');              
-    }
-  
-    render() {
-        console.log('rendering repliesEditor');
-        
+    render() {   
         return (
           <View style={styles.container} testID="repliesEditor" >
             <View>
@@ -34,6 +30,7 @@ class repliesEditor extends PureComponent {
                 outlineColor='#F57871'
                 style={{marginBottom: 20}}
                 testID="cancelButton"
+                onPress={() => this.props.navigator.dismissModal({ animationType: 'slide-down'})}
               />
               <Button blue40
                 label="Save"
@@ -50,9 +47,16 @@ class repliesEditor extends PureComponent {
 
 const styles ={
     container: {
-      flex: 1,
-      backgroundColor: '#red',
+      flex: 1
     },
   };
 
-  KeyboardRegistry.registerKeyboard('repliesEditor', () => repliesEditor);
+function mapStateToProps() {
+    return {
+        
+    };
+}
+
+export default connect(mapStateToProps)(RepliesEditor);
+
+KeyboardRegistry.registerKeyboard('RepliesEditor', () => ConnectedRepliesEditor);

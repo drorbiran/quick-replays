@@ -15,7 +15,7 @@ const state = remx.state(initialState);
 export const getters = remx.getters({
 
     getKeyboardScreen(){
-        return state.selectedReply;
+        return state.keyBoardScreen;
     }
 
 });
