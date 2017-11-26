@@ -9,6 +9,11 @@ import * as repliesStore from '../stores/replies/replies.store';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 class RepliesEditor extends PureComponent {
     
+    onCancelPress = () => {
+      keyboardStore.setters.setKeyboardScreen(undefined);
+      this.props.navigator.dismissModal({ animationType: 'slide-down'});
+    }
+  
     render() {   
         return (
           <View style={styles.container} testID="repliesEditor" >
@@ -30,7 +35,7 @@ class RepliesEditor extends PureComponent {
                 outlineColor='#F57871'
                 style={{marginBottom: 20}}
                 testID="cancelButton"
-                onPress={() => this.props.navigator.dismissModal({ animationType: 'slide-down'})}
+                onPress={this.onCancelPress}
               />
               <Button blue40
                 label="Save"
