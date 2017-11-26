@@ -9,22 +9,34 @@ import {KeyboardRegistry} from 'react-native-keyboard-input';
 import * as repliesStore from '../stores/replies/replies.store';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
+
 class RepliesEditor extends PureComponent {
     
     onCancelPress = () => {
       keyboardStore.setters.setKeyboardScreen(undefined);
       this.props.navigator.dismissModal({ animationType: 'slide-down'});
     }
+
+    renderReplies = () => {
+      return this.props.replies.map(({key, title, description}) => {
+        return <ItemEditor
+          title= {title}
+          description = {description}
+          onTitleChange={this.onTitleChange}
+          itemKey={key}
+          key={key}
+        />
+      })
+    }
+
+    onTitleChange = (newTitle, key) => {
+      repliesStore.setters.setReplyTitle(key, newTitle);
+    }
   
     render() {   
         return (
           <View style={styles.container} testID="repliesEditor" >
-            <View>
-              <ItemEditor
-                title="bla bla"
-                description="test description"
-              />
-            </View>
+            {this.renderReplies()}
             <View center>
               <Button green40
                 label="Add"
@@ -63,7 +75,7 @@ const styles ={
 
 function mapStateToProps() {
     return {
-        
+        replies : repliesStore.getters.getReplies()
     };
 }
 

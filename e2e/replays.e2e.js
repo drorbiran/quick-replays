@@ -13,9 +13,9 @@ describe('Example', () => {
 
   it('should change the reply when selecting one of the replies', async () => {
     await element(by.id('action1')).tap();
-    await element(by.id('Greeting')).tap();
+    await element(by.id('defaultReply1')).tap();
     await expect(element(by.label('Hi there, I\'m here to chat if you have any questions.'))).toBeVisible();
-    await element(by.id('Bye')).tap();
+    await element(by.id('defaultReply2')).tap();
     await expect(element(by.label('Thank you for dropping by'))).toBeVisible();    
   });
 

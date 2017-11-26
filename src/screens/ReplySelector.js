@@ -15,8 +15,8 @@ class ReplySelector extends PureComponent {
                 label={reply.title}
                 size='small'
                 link
-                testID={reply.title}
-                key={reply.title}
+                testID={reply.key}
+                key={reply.key}
                 onPress={() => repliesStore.setters.setSelectedReply(reply)}
               />
     })

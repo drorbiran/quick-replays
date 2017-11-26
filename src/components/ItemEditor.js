@@ -5,7 +5,8 @@ class ItemEditor extends PureComponent {
     static PropTypes = {
         title: PropTypes.string,
         description: PropTypes.string,
-        onTitleChange: PropTypes.func
+        onTitleChange: PropTypes.func,
+        itemKey: PropTypes.string
     };
 
     render() {
@@ -14,14 +15,15 @@ class ItemEditor extends PureComponent {
                 <TextInput
                     placeholder = "Add another quick reply"
                     value={this.props.title}
-                    onChangeText={(text) => console.log(text)}
+                    onChangeText={(newTitle) => this.props.onTitleChange(newTitle,this.props.itemKey)}
                     maxLength={42}
                 />
                 <TextInput
                     placeholder = "Add your click reply content"
                     multiline
                     value={this.props.description}
-                    onChangeText={(text) => console.log(text)}
+                    onChangeText={(text) => console.log('TBD')}
+                    blurOnSubmit={true}
                     maxLength={420}
                 />          
             </View>
@@ -34,7 +36,10 @@ const styles = {
         marginTop: 24,
         marginLeft: 12,
         marginRight: 12,
-        padding: 12
+        padding: 12,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: '#C2C7CB' 
     }
 }
 

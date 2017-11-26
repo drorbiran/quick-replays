@@ -7,14 +7,17 @@ const initialState = {
     },
     replies: [
         {
+            key: 'defaultReply1',
             title: "Greeting",
             description: "Hi there, I'm here to chat if you have any questions."
         },
         {
+            key: 'defaultReply2',
             title: "Bye",
             description: "Thank you for dropping by"
         },
         {
+            key: 'defaultReply3',
             title: "Getting leads",
             description: "We have 30% sale this week, leave me your email and I'll get back to you with the details."
         },
@@ -50,6 +53,20 @@ export const setters = remx.setters({
 
     setSelectedReply(reply){
       state.selectedReply = reply;
+    },
+
+    setReplyTitle(key,newTitle){
+        const newReplies = state.replies.map((reply) => {
+            if (reply.key !== key) {
+                return reply
+            } else {
+                return {
+                    ...reply,
+                    ...{title: newTitle}
+                }
+            }
+        })
+        state.replies = newReplies; 
     }
 
 });
