@@ -9,11 +9,23 @@ import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
 class ReplySelector extends PureComponent {
   
+  renderAvailableReplies = () => {
+    return this.props.replies.map((reply) => {
+      return <Button
+                label={reply.title}
+                size='small'
+                link
+                testID={reply.title}
+                key={reply.title}
+                onPress={() => repliesStore.setters.setSelectedReply(reply)}
+              />
+    })
+  }
   
   render() {
         return (
           <View style={styles.container} testID="replySelector" >
-            <Text>{JSON.stringify(this.props.selectedReply)}</Text>
+            {this.renderAvailableReplies()}
             <Button blue40 bottom
               label="edit"
               size="medium"
@@ -39,7 +51,7 @@ const styles ={
  
   function mapStateToProps() {
     return {
-        selectedReply: repliesStore.getters.getSelectedReply()
+        replies: repliesStore.getters.getReplies()
     };
 }
 
