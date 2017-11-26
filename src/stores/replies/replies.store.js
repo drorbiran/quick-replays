@@ -55,6 +55,11 @@ export const setters = remx.setters({
       state.selectedReply = reply;
     },
 
+    setReplies(replies){
+        console.log('set new replies', replies);
+        state.replies = replies;
+    }, 
+
     setReplyTitle(key,newTitle){
         state.replies = state.replies.map((reply) => {
             if (reply.key !== key) {
@@ -69,7 +74,8 @@ export const setters = remx.setters({
     },
 
     setReplyDescription(key,newDescription){
-        state.replies = state.replies.map((reply) => {
+        console.log('setDexription');
+        const newReplies = state.replies.map((reply) => {
             if (reply.key !== key) {
                 return reply
             } else {
@@ -79,6 +85,7 @@ export const setters = remx.setters({
                 }
             }
         })
+        state.replies = newReplies;
     }
 
 });

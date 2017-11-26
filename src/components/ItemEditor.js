@@ -1,5 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { View, TextInput } from 'react-native-ui-lib'
+
+
 class ItemEditor extends PureComponent {
     
     static PropTypes = {
@@ -18,6 +20,7 @@ class ItemEditor extends PureComponent {
                     value={this.props.title}
                     onChangeText={(newTitle) => this.props.onTitleChange(newTitle,this.props.itemKey)}
                     maxLength={42}
+                    testID={this.props.itemKey}
                 />
                 <TextInput
                     placeholder = "Add your click reply content"
@@ -26,6 +29,7 @@ class ItemEditor extends PureComponent {
                     onChangeText={(newDescription) => this.props.onDescriptionChange(newDescription,this.props.itemKey)}
                     blurOnSubmit={true}
                     maxLength={420}
+                    testID={this.props.itemKey + "Description"}
                 />          
             </View>
         );

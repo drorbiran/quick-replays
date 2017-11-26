@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react'
-import { ScrollView } from 'react-native'
+import React, { PureComponent, Component } from 'react'
+import { ScrollView } from 'react-native';
 import {View, Text, Button, Colors} from 'react-native-ui-lib';
-import ItemEditor from '../components/ItemEditor'
+import ItemEditor from '../components/ItemEditor';
+import _ from 'lodash';
 
 import { connect } from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
@@ -12,18 +13,31 @@ import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
 class RepliesEditor extends PureComponent {
     
+    state = {
+      replies: this.props.replies
+    }
+  
+    onSavePress = () => {   
+      repliesStore.setters.setReplies(this.state.replies);
+      keyboardStore.setters.setKeyboardScreen(undefined);
+      this.props.navigator.dismissModal({ animationType: 'slide-down'});
+    }
+    
     onCancelPress = () => {
+      this.setState(() => {
+        replies: this.props.replies;
+      })
       keyboardStore.setters.setKeyboardScreen(undefined);
       this.props.navigator.dismissModal({ animationType: 'slide-down'});
     }
 
     renderReplies = () => {
-      return this.props.replies.map(({key, title, description}) => {
+      return this.state.replies.map(({key, title, description}) => {
         return <ItemEditor
           title= {title}
           description = {description}
-          onTitleChange={this.onTitleChange}
-          onDescriptionChange={this.onDescriptionChange}
+          onTitleChange={_.debounce(this.onTitleChange,300)}
+          onDescriptionChange={_.debounce(this.onDescriptionChange,300)}
           itemKey={key}
           key={key}
         />
@@ -31,18 +45,38 @@ class RepliesEditor extends PureComponent {
     }
 
     onTitleChange = (newTitle, key) => {
-      repliesStore.setters.setReplyTitle(key, newTitle);
+      const newReplies = this.state.replies.map((reply) => {
+        if (reply.key !== key) {
+            return reply
+        } else {
+            return {
+                ...reply,
+                ...{title: newTitle}
+            }
+        }
+      })
+      this.setState(() => {return { replies: newReplies }})
     }
 
     onDescriptionChange = (newDescription, key) => {
-      repliesStore.setters.setReplyDescription(key, newDescription);      
+      const newReplies = this.state.replies.map((reply) => {
+        if (reply.key !== key) {
+            return reply
+        } else {
+            return {
+                ...reply,
+                ...{description: newDescription}
+            }
+        }
+      })
+      this.setState(() => {return { replies: newReplies }})
     }
   
     render() {   
         return (
-          <View style={styles.container} testID="repliesEditor" >
+          <ScrollView style={styles.repliesContainer} testID="repliesEditor" >
             {this.renderReplies()}
-            <View center>
+            <View center style={styles.buttonsContainer}>
               <Button green40
                 label="Add"
                 size="medium"
@@ -65,17 +99,24 @@ class RepliesEditor extends PureComponent {
                 outline
                 outlineColor='#57a8ef'
                 style={{marginBottom: 20}}
+                testID="saveButton"
+                onPress={this.onSavePress}
               />
             </View>
-          </View>
+          </ScrollView>
         );
     }
 }
 
 const styles ={
-    container: {
+    repliesContainer : {
       flex: 1
     },
+    
+    buttonsContainer: {
+      marginTop: 24
+    }
+
   };
 
 function mapStateToProps() {
