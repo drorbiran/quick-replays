@@ -24,6 +24,7 @@ describe('Example', () => {
     await element(by.id('editRepliesButton')).tap();
     await element(by.id('defaultReply1')).replaceText('new saved reply');
     await element(by.id('defaultReply1Description')).replaceText('');
+    await element(by.id('defaultReply1Description')).tap();
     await element(by.id('defaultReply1Description')).typeText('new Description');
     await element(by.id('cancelButton')).tap();
     await element(by.id('cancelButton')).tap(); 
