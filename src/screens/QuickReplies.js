@@ -22,6 +22,7 @@ class QuickReplies extends PureComponent {
                 setRef={(r) => this.textInputRef = r}
                 actionLabel="Choose a quick reply"
                 onPress={() => keyboardStore.setters.setKeyboardScreen('ReplySelector')}
+                onKeyboardSend={(description) => repliesStore.setters.setSelectedReply({description})}
             />
         )
     }
@@ -34,7 +35,6 @@ class QuickReplies extends PureComponent {
     }
  
     render() {
-        console.log('rendering QuickReplies screen');
         return (
             <View flex paddingH-25 paddingT-120>
                 <Text center dark10 text60>

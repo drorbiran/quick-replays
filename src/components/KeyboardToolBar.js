@@ -4,12 +4,22 @@ import { Button } from 'react-native-ui-lib';
 
 class KeyboardToolBar extends PureComponent {
     
+    state = {
+        text: ""
+    }
+
     static PropTypes = {
         onFocus: PropTypes.func,
         setRef: PropTypes.func,
         actionLabel: PropTypes.string,
-        onPress: PropTypes.func
+        onPress: PropTypes.func,
+        onKeyboardSend: PropTypes.func
     };
+
+    handleSubmit = () => {
+        this.props.onKeyboardSend(this.state.text);
+        this.setState({text: ""})
+    }
     
     render() {
         return (
@@ -18,6 +28,10 @@ class KeyboardToolBar extends PureComponent {
                 placeholder="Type Your Message"
                 onFocus={this.props.onFocus}
                 ref={r => this.props.setRef(r)}
+                returnKeyType='send'
+                value={this.state.text}
+                onChangeText={(text) => this.setState({text})}
+                onSubmitEditing={this.handleSubmit}
             />
             <Button center
                 testID="action1"
