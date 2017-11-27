@@ -1,38 +1,26 @@
 package com.quick;
 
-
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
-
-import java.util.List;
-
 import com.wix.reactnativekeyboardinput.KeyboardInputPackage;
 
-
+import java.util.Arrays;
+import java.util.List;
 
 public class MainApplication extends NavigationApplication {
 
   @Override
   public boolean isDebug() {
-    return BuildConfig.DEBUG;
+      return BuildConfig.DEBUG;
   }
 
-  @NonNull
+  @Nullable
   @Override
   public List<ReactPackage> createAdditionalReactPackages() {
-    // Add the packages you require here.
-    // No need to add RnnPackage and MainReactPackage
-    return null;
-  }
-
-  @Override
-  protected List<ReactPackage> getPackages() {
-    return Arrays.<ReactPackage>asList(
-        //add this pacakge:
-        new KeyboardInputPackage(MainApplication.this)
+      return Arrays.<ReactPackage>asList(
+          new KeyboardInputPackage(MainApplication.this, true)
       );
   }
-
 }

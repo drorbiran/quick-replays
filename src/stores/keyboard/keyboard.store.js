@@ -14,7 +14,7 @@ const state = remx.state(initialState);
 
 export const getters = remx.getters({
 
-    getKeyboardScreen(){
+    getKeyboardScreen() {
         return state.keyBoardScreen;
     }
 
@@ -27,8 +27,8 @@ export const getters = remx.getters({
 //#####################################
 export const setters = remx.setters({
 
-    setKeyboardScreen(screen){
-      state.keyBoardScreen = screen;
+    setKeyboardScreen(screen) {
+        state.keyBoardScreen = screen;
     }
 
 });

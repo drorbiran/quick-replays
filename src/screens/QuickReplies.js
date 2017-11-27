@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
-import {FlatList, TouchableOpacity, Platform} from 'react-native';
-import {View, Text, Button, TextInput, Color} from 'react-native-ui-lib'
+import { FlatList, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, Button, TextInput, Color } from 'react-native-ui-lib'
 import { connect } from 'remx';
-import {KeyboardAccessoryView, KeyboardUtils, KeyboardRegistry} from 'react-native-keyboard-input';
+import { KeyboardAccessoryView, KeyboardUtils, KeyboardRegistry } from 'react-native-keyboard-input';
 
 
 import "./ReplySelector";
@@ -14,7 +14,7 @@ import * as keyboardStore from '../stores/keyboard/keyboard.store';
 import * as actions from '../stores/replies/replies.actions';
 
 class QuickReplies extends PureComponent {
-    
+
     keyboardToolbarContent = () => {
         return (
             <KeyboardToolBar
@@ -22,7 +22,7 @@ class QuickReplies extends PureComponent {
                 setRef={(r) => this.textInputRef = r}
                 actionLabel="Choose a quick reply"
                 onPress={() => keyboardStore.setters.setKeyboardScreen('ReplySelector')}
-                onKeyboardSend={(description) => repliesStore.setters.setSelectedReply({description})}
+                onKeyboardSend={(description) => repliesStore.setters.setSelectedReply({ description })}
             />
         )
     }
@@ -33,11 +33,11 @@ class QuickReplies extends PureComponent {
             title: 'Edit Replies'
         })
     }
- 
+
     render() {
         return (
-            <View flex paddingH-25 paddingT-120>
-                <Text center dark10 text60>
+            <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                <Text center dark10 text60 style={{ marginTop: 48 }}>
                     {this.props.selectedReply.description}
                 </Text>
                 <KeyboardAccessoryView

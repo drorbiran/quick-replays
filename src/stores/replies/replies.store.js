@@ -20,7 +20,7 @@ const initialState = {
             key: 'defaultReply3',
             title: "Getting leads",
             description: "We have 30% sale this week, leave me your email and I'll get back to you with the details."
-        }     
+        }
     ]
 };
 
@@ -34,11 +34,11 @@ const state = remx.state(initialState);
 
 export const getters = remx.getters({
 
-    getSelectedReply(){
+    getSelectedReply() {
         return state.selectedReply;
     },
 
-    getReplies(){
+    getReplies() {
         return state.replies;
     }
 
@@ -51,29 +51,29 @@ export const getters = remx.getters({
 //#####################################
 export const setters = remx.setters({
 
-    setSelectedReply(reply){
-      state.selectedReply = reply;
+    setSelectedReply(reply) {
+        state.selectedReply = reply;
     },
 
-    setReplies(replies){
+    setReplies(replies) {
         console.log('set new replies', replies);
         state.replies = replies;
-    }, 
+    },
 
-    setReplyTitle(key,newTitle){
+    setReplyTitle(key, newTitle) {
         state.replies = state.replies.map((reply) => {
             if (reply.key !== key) {
                 return reply
             } else {
                 return {
                     ...reply,
-                    ...{title: newTitle}
+                    ...{ title: newTitle }
                 }
             }
-        }) 
+        })
     },
 
-    setReplyDescription(key,newDescription){
+    setReplyDescription(key, newDescription) {
         console.log('setDexription');
         const newReplies = state.replies.map((reply) => {
             if (reply.key !== key) {
@@ -81,7 +81,7 @@ export const setters = remx.setters({
             } else {
                 return {
                     ...reply,
-                    ...{description: newDescription}
+                    ...{ description: newDescription }
                 }
             }
         })

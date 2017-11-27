@@ -1,4 +1,4 @@
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
 import QuickReplies from './QuickReplies';
 import RepliesEditor from './RepliesEditor';

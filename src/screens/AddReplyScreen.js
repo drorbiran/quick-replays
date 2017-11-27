@@ -6,24 +6,24 @@ import * as repliesActions from '../stores/replies/replies.actions';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
 class AddReplyScreen extends Component {
-    
+
     state = {
         title: "",
         description: "",
     }
-    
+
     static navigatorButtons = {
-        
+
     }
 
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
 
-        this.updateButtons(true);  
+        this.updateButtons(true);
     }
 
-    updateButtons =  (disableAdd) => {
+    updateButtons = (disableAdd) => {
         this.props.navigator.setButtons({
             rightButtons: [
                 {
@@ -40,43 +40,43 @@ class AddReplyScreen extends Component {
                     testID: 'cancelBtn'
                 }
             ]
-          });
+        });
     }
 
-    onNavigatorEvent = (event) => {        
+    onNavigatorEvent = (event) => {
         if (event.type == 'NavBarButtonPress') {
             switch (event.id) {
-                  case 'add':
+                case 'add':
                     this.onAddPress();
                     break;
-                  case 'cancel':
-                    this.props.navigator.dismissModal({animationType: 'slide-down'});
+                case 'cancel':
+                    this.props.navigator.dismissModal({ animationType: 'slide-down' });
                     break;
-                  default:
-                     console.log('default: ', event.id)
-              }
-        }  
+                default:
+                    console.log('default: ', event.id)
+            }
+        }
     }
 
     onAddPress = () => {
         repliesActions.addNewReply(this.state);
-        keyboardStore.setters.setKeyboardScreen(undefined);                    
-        this.props.navigator.dismissAllModals({animationType: 'slide-down'});
+        keyboardStore.setters.setKeyboardScreen(undefined);
+        this.props.navigator.dismissAllModals({ animationType: 'slide-down' });
     }
-    
-    
+
+
     onTitleChange = (newTitle) => {
-        this.setState({title: newTitle});
+        this.setState({ title: newTitle });
         this.updateAddBtn();
     }
 
-    
+
     onDescriptionChange = (newDescription) => {
-        this.setState({description: newDescription});
+        this.setState({ description: newDescription });
         this.updateAddBtn();
     }
 
-    updateAddBtn(){
+    updateAddBtn() {
         const titleLength = this.state.title && this.state.title.length;
         const descriptionLength = this.state.description && this.state.description.length;
         const enabledAdd = ((titleLength > 0) && (descriptionLength > 0));
@@ -86,26 +86,28 @@ class AddReplyScreen extends Component {
             this.updateButtons(true);
         }
     }
-    
+
     render() {
         return (
-            <View style={styles.containerStyle}>
-                <TextInput
-                    placeholder="Add your quick reply title"
-                    value={this.state.title}
-                    onChangeText={this.onTitleChange}
-                    maxLength={42}
-                    testID="newTitleInput"
-                />
-                <TextInput
-                    placeholder="Add your quick reply content"
-                    multiline
-                    value={this.state.description}
-                    onChangeText={this.onDescriptionChange}
-                    blurOnSubmit={true}
-                    maxLength={420}
-                    testID="newDescriptionInput"
-                />
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <View style={styles.containerStyle}>
+                    <TextInput
+                        placeholder="Add your quick reply title"
+                        value={this.state.title}
+                        onChangeText={this.onTitleChange}
+                        maxLength={42}
+                        testID="newTitleInput"
+                    />
+                    <TextInput
+                        placeholder="Add your quick reply content"
+                        multiline
+                        value={this.state.description}
+                        onChangeText={this.onDescriptionChange}
+                        blurOnSubmit={true}
+                        maxLength={420}
+                        testID="newDescriptionInput"
+                    />
+                </View>
             </View>
         );
     }
@@ -116,10 +118,12 @@ const styles = {
         marginTop: 24,
         marginLeft: 12,
         marginRight: 12,
-        padding: 12,
         borderRadius: 12,
+        paddingLeft: 12,
+        paddingRight: 12,
+        paddingTop: 12,
         borderWidth: 1,
-        borderColor: '#C2C7CB'
+        borderColor: '#C2C7CB',
     }
 }
 

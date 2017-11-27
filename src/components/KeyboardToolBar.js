@@ -3,7 +3,7 @@ import { View, TextInput } from 'react-native-ui-lib';
 import { Button } from 'react-native-ui-lib';
 
 class KeyboardToolBar extends PureComponent {
-    
+
     state = {
         text: ""
     }
@@ -18,28 +18,28 @@ class KeyboardToolBar extends PureComponent {
 
     handleSubmit = () => {
         this.props.onKeyboardSend(this.state.text);
-        this.setState({text: ""})
+        this.setState({ text: "" })
     }
-    
+
     render() {
         return (
-            <View bottom background-dark80>
-            <TextInput
-                placeholder="Type Your Message"
-                onFocus={this.props.onFocus}
-                ref={r => this.props.setRef(r)}
-                returnKeyType='send'
-                value={this.state.text}
-                onChangeText={(text) => this.setState({text})}
-                onSubmitEditing={this.handleSubmit}
-            />
-            <Button center
-                testID="action1"
-                label={this.props.actionLabel}
-                onPress={this.props.onPress}
-                size="small"
-                fullWidth={true}
-            />
+            <View background-black80>
+                <TextInput
+                    placeholder="Type Your Message"
+                    onFocus={this.props.onFocus}
+                    ref={r => this.props.setRef(r)}
+                    returnKeyType='send'
+                    value={this.state.text}
+                    onChangeText={(text) => this.setState({ text })}
+                    onSubmitEditing={this.handleSubmit}
+                />
+                <Button center
+                    testID="action1"
+                    label={this.props.actionLabel}
+                    onPress={this.props.onPress}
+                    size="small"
+                    fullWidth={true}
+                />
             </View>
         );
     }
