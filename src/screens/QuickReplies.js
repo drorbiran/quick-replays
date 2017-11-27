@@ -7,6 +7,7 @@ import {KeyboardAccessoryView, KeyboardUtils, KeyboardRegistry} from 'react-nati
 
 import "./ReplySelector";
 import "./RepliesEditor";
+import KeyboardToolBar from '../components/KeyboardToolBar'
 
 import * as repliesStore from '../stores/replies/replies.store';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
@@ -16,20 +17,12 @@ class QuickReplies extends PureComponent {
     
     keyboardToolbarContent = () => {
         return (
-            <View bottom background-dark80>
-                <TextInput
-                    placeholder="Type Your Message"
-                    onFocus={() => keyboardStore.setters.setKeyboardScreen(undefined)}
-                    ref={r => this.textInputRef = r}
-                />
-                <Button center
-                    testID="action1"
-                    label="Choose a quick reply"
-                    onPress={() => keyboardStore.setters.setKeyboardScreen('ReplySelector')}
-                    size="small"
-                    fullWidth={true}
-                />
-            </View>
+            <KeyboardToolBar
+                onFocus={() => keyboardStore.setters.setKeyboardScreen(undefined)}
+                setRef={(r) => this.textInputRef = r}
+                actionLabel="Choose a quick reply"
+                onPress={() => keyboardStore.setters.setKeyboardScreen('ReplySelector')}
+            />
         )
     }
 
