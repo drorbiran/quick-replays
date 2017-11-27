@@ -8,6 +8,7 @@ import { connect } from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 
 import * as repliesStore from '../stores/replies/replies.store';
+import * as repliesActions from '../stores/replies/replies.actions';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
 
@@ -31,6 +32,12 @@ class RepliesEditor extends PureComponent {
       this.props.navigator.dismissModal({ animationType: 'slide-down'});
     }
 
+    onDeleteItem = (key) => {
+      const newReplies = repliesActions.deleteReplyByKey(key,this.state.replies);
+      this.setState(() => {return { replies: newReplies }})      
+    }
+
+
     renderReplies = () => {
       return this.state.replies.map(({key, title, description}) => {
         return <ItemEditor
@@ -38,6 +45,7 @@ class RepliesEditor extends PureComponent {
           description = {description}
           onTitleChange={_.debounce(this.onTitleChange,300)}
           onDescriptionChange={_.debounce(this.onDescriptionChange,300)}
+          onDeleteItem={this.onDeleteItem}
           itemKey={key}
           key={key}
         />

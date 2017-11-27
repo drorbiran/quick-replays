@@ -1,17 +1,10 @@
-// import * as store from './topicsStore';
-// import * as redditService from '../../services/reddit';
+import * as repliesStore from './replies.store'
 
-// export function setLoading(isLoading) {
-//     store.setters.setLoading(isLoading);
-// }
-
-// export function fetchTopics() {
-//     setLoading(true);
-//     setTimeout(function() {
-//         const topics = redditService.getTopics();
-//         store.setters.setTopics(topics);
-//         console.log(topics);
-//         setLoading(false);
-//     }, 3000);
-    
-// }
+export function deleteReplyByKey(key,replies){
+    const replyIndex = replies.findIndex((reply) => reply.key === key);
+    const newReplies = [
+        ...replies.slice(0,replyIndex),
+        ...replies.slice(replyIndex + 1)
+    ]
+    return newReplies;
+}
