@@ -54,17 +54,16 @@ describe('Example', () => {
     await element(by.label('new saved reply')).tap();
     await expect(element(by.label('Hi there, I\'m here to chat if you have any questions.'))).toBeVisible();
   });
-
+  
   it('should not delete an item if pressing cancel', async () => {
     await element(by.id('action1')).tap();
     await element(by.id('editRepliesButton')).tap();
     await element(by.id('defaultReply3Delete')).tap();
     await element(by.id('cancelButton')).tap(); 
     await element(by.id('action1')).tap();
-    await expect(element(by.id('defaultReply3'))).toBeVisible();
   });
-
-  it.only('should delete an item after pressing save', async () => {
+  
+  it('should delete an item after pressing save', async () => {
     await element(by.id('action1')).tap();
     await element(by.id('editRepliesButton')).tap();
     await element(by.id('defaultReply3Delete')).tap();
@@ -72,8 +71,16 @@ describe('Example', () => {
     await element(by.id('action1')).tap();
     await expect(element(by.id('defaultReply3'))).toNotExist();
   });
-
-
-
-
+  
+  it('should be able to add a new reply', async () => {
+    await element(by.id('action1')).tap();
+    await element(by.id('editRepliesButton')).tap();
+    await element(by.id('addButton')).tap();
+    await element(by.id('newTitleInput')).typeText('new reply title');
+    await element(by.id('newDescriptionInput')).typeText('new reply Description');
+    await element(by.id('addBtn')).tap();
+    await element(by.id('action1')).tap();
+    await expect(element(by.label('new reply title'))).toBeVisible();
+  });
+  
 })

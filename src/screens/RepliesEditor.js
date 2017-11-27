@@ -99,6 +99,7 @@ class RepliesEditor extends PureComponent {
                 outlineColor='#84D3A0'
                 style={{marginBottom: 20}}
                 onPress={this.onAddPress}
+                testID="addButton"
               />
               <Button red40
                 label="Cancel"

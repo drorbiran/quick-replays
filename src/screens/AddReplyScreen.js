@@ -17,7 +17,7 @@ class AddReplyScreen extends PureComponent {
             {
                 title: 'Add',
                 id: 'add',
-                testID: 'AddBtn',
+                testID: 'addBtn',
 
             }
         ],
@@ -39,17 +39,21 @@ class AddReplyScreen extends PureComponent {
         if (event.type == 'NavBarButtonPress') {
             switch (event.id) {
                   case 'add':
-                    repliesActions.addNewReply(this.state);
-                    keyboardStore.setters.setKeyboardScreen(undefined);                    
-                    this.props.navigator.dismissAllModals({animationType: 'slide-down'});
+                    this.onAddPress();
                     break;
                   case 'cancel':
-                    console.log('cancel');
+                    this.props.navigator.dismissModal({animationType: 'slide-down'});
                     break;
                   default:
                      console.log('default: ', event.id)
               }
         }  
+    }
+
+    onAddPress = () => {
+        repliesActions.addNewReply(this.state);
+        keyboardStore.setters.setKeyboardScreen(undefined);                    
+        this.props.navigator.dismissAllModals({animationType: 'slide-down'});
     }
     
     
