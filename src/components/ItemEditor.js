@@ -20,7 +20,7 @@ class ItemEditor extends PureComponent {
                 <View style={{ flex: 1, flexDirection: 'row'}}>
                     <TextInput
                         containerStyle={{flex: 1}}
-                        placeholder="Add another quick reply"
+                        placeholder="Add your quick reply title"
                         value={this.props.title}
                         onChangeText={(newTitle) => this.props.onTitleChange(newTitle, this.props.itemKey)}
                         maxLength={42}

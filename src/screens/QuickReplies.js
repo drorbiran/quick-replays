@@ -13,7 +13,7 @@ import * as keyboardStore from '../stores/keyboard/keyboard.store';
 import * as actions from '../stores/replies/replies.actions';
 
 class QuickReplies extends PureComponent {
-
+    
     keyboardToolbarContent = () => {
         return (
             <View bottom background-dark80>
