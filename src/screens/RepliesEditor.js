@@ -32,6 +32,13 @@ class RepliesEditor extends PureComponent {
       this.props.navigator.dismissModal({ animationType: 'slide-down'});
     }
 
+    onAddPress = () => {
+      this.props.navigator.showModal({
+        screen: 'AddReplyScreen',
+        title: 'Add Reply'
+      })
+    }
+
     onDeleteItem = (key) => {
       const newReplies = repliesActions.deleteReplyByKey(key,this.state.replies);
       this.setState(() => {return { replies: newReplies }})      
@@ -91,6 +98,7 @@ class RepliesEditor extends PureComponent {
                 outline
                 outlineColor='#84D3A0'
                 style={{marginBottom: 20}}
+                onPress={this.onAddPress}
               />
               <Button red40
                 label="Cancel"
