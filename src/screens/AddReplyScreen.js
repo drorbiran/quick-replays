@@ -1,38 +1,46 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native-ui-lib'
 import { connect } from 'remx';
 
 import * as repliesActions from '../stores/replies/replies.actions';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
-class AddReplyScreen extends PureComponent {
+class AddReplyScreen extends Component {
     
     state = {
         title: "",
-        description: ""
+        description: "",
     }
     
     static navigatorButtons = {
-        rightButtons: [
-            {
-                title: 'Add',
-                id: 'add',
-                testID: 'addBtn',
-
-            }
-        ],
-        leftButtons: [
-            {
-                title: 'Cancel',
-                id: 'cancel',
-                testID: 'cancelBtn'
-            }
-        ]
+        
     }
 
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+
+        this.updateButtons(true);  
+    }
+
+    updateButtons =  (disableAdd) => {
+        this.props.navigator.setButtons({
+            rightButtons: [
+                {
+                    title: 'Add',
+                    id: 'add',
+                    testID: 'addBtn',
+                    disabled: disableAdd
+                }
+            ],
+            leftButtons: [
+                {
+                    title: 'Cancel',
+                    id: 'cancel',
+                    testID: 'cancelBtn'
+                }
+            ]
+          });
     }
 
     onNavigatorEvent = (event) => {        
@@ -57,13 +65,35 @@ class AddReplyScreen extends PureComponent {
     }
     
     
+    onTitleChange = (newTitle) => {
+        this.setState({title: newTitle});
+        this.updateAddBtn();
+    }
+
+    
+    onDescriptionChange = (newDescription) => {
+        this.setState({description: newDescription});
+        this.updateAddBtn();
+    }
+
+    updateAddBtn(){
+        const titleLength = this.state.title && this.state.title.length;
+        const descriptionLength = this.state.description && this.state.description.length;
+        const enabledAdd = ((titleLength > 0) && (descriptionLength > 0));
+        if (enabledAdd) {
+            this.updateButtons(false);
+        } else {
+            this.updateButtons(true);
+        }
+    }
+    
     render() {
         return (
             <View style={styles.containerStyle}>
                 <TextInput
                     placeholder="Add your quick reply title"
                     value={this.state.title}
-                    onChangeText={(newTitle) => this.setState((prevState) => ({...prevState, title: newTitle}))}
+                    onChangeText={this.onTitleChange}
                     maxLength={42}
                     testID="newTitleInput"
                 />
@@ -71,7 +101,7 @@ class AddReplyScreen extends PureComponent {
                     placeholder="Add your quick reply content"
                     multiline
                     value={this.state.description}
-                    onChangeText={(newDescription) => this.setState((prevState) => ({...prevState, description: newDescription}))}
+                    onChangeText={this.onDescriptionChange}
                     blurOnSubmit={true}
                     maxLength={420}
                     testID="newDescriptionInput"
