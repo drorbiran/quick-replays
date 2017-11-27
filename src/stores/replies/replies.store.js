@@ -20,7 +20,7 @@ const initialState = {
             key: 'defaultReply3',
             title: "Getting leads",
             description: "We have 30% sale this week, leave me your email and I'll get back to you with the details."
-        },
+        }     
     ]
 };
 
