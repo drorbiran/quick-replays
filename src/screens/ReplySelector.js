@@ -1,36 +1,41 @@
-import React, { PureComponent } from 'react'
-import { ScrollView } from 'react-native'
-import { View, Text, Button, Colors } from 'react-native-ui-lib';
-import { connect } from 'remx';
-import { KeyboardRegistry } from 'react-native-keyboard-input';
+import React, {PureComponent, PropTypes} from 'react';
+import {View, Button} from 'react-native-ui-lib';
+import {connect} from 'remx';
+import {KeyboardRegistry} from 'react-native-keyboard-input';
 
 import * as repliesStore from '../stores/replies/replies.store';
-import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
 class ReplySelector extends PureComponent {
 
+  static propTypes = {
+    replies: PropTypes.object,
+    navigator: PropTypes.object
+  };
+
   renderAvailableReplies = () => {
-    return this.props.replies.map((reply) => {
-      return <Button
+    return this.props.replies.map(reply => {
+      return (<Button
         label={reply.title}
-        size='small'
+        size="small"
         link
         testID={reply.key}
         key={reply.key}
         onPress={() => repliesStore.setters.setSelectedReply(reply)}
-      />
-    })
+      />);
+    });
   }
 
   render() {
     return (
       <View style={styles.container} testID="replySelector" >
         {this.renderAvailableReplies()}
-        <Button blue40 bottom
+        <Button
+          blue40
+          bottom
           label="edit"
           size="medium"
           outline
-          outlineColor='#57a8ef'
+          outlineColor="#57a8ef"
           style={styles.replyBtn}
           onPress={() => KeyboardRegistry.onItemSelected('ReplySelector')}
           testID="editRepliesButton"

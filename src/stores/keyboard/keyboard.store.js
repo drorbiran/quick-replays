@@ -1,7 +1,7 @@
 import * as remx from 'remx';
 
 const initialState = {
-    keyBoardScreen: undefined
+  keyBoardScreen: undefined
 };
 
 const state = remx.state(initialState);
@@ -14,21 +14,21 @@ const state = remx.state(initialState);
 
 export const getters = remx.getters({
 
-    getKeyboardScreen() {
-        return state.keyBoardScreen;
-    }
+  getKeyboardScreen() {
+    return state.keyBoardScreen;
+  }
 
 });
 
 //#####################################
 // setters
-// All the functions that are going to change parts of the state should be wrapped within the Setters function. 
+// All the functions that are going to change parts of the state should be wrapped within the Setters function.
 // The warpped setters functions shoud be defined inside the store and should be exported.
 //#####################################
 export const setters = remx.setters({
 
-    setKeyboardScreen(screen) {
-        state.keyBoardScreen = screen;
-    }
+  setKeyboardScreen(screen) {
+    state.keyBoardScreen = screen;
+  }
 
 });

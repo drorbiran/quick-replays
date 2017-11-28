@@ -1,0 +1,17 @@
+{
+  "plugins": ["react-native"],
+  "extends": [
+    "wix/react",
+    "wix/esnext"
+  ],
+  "rules": {
+    "no-use-before-define": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "default-case": 0,
+    "lodash/import-scope": 0,
+    "react/jsx-handler-names": 0
+  },
+  "globals": {
+    "waitFor": true
+  }
+}
