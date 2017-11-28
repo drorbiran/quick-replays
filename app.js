@@ -1,18 +1,12 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
 import {Navigation} from 'react-native-navigation';
+import {registeredScreens} from './src/constants/constants';
 
 import {registerScreens} from './src/screens';
 registerScreens();
 
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'QuickReplies',
+    screen: registeredScreens.QuickReplies,
     title: 'Quick Replies'
   }
 });

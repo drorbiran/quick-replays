@@ -2,6 +2,7 @@ import React, {PureComponent, PropTypes} from 'react';
 import {View, Button} from 'react-native-ui-lib';
 import {connect} from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
+import {registeredScreens} from '../constants/constants';
 
 import * as repliesStore from '../stores/replies/replies.store';
 
@@ -37,7 +38,7 @@ class ReplySelector extends PureComponent {
           outline
           outlineColor="#57a8ef"
           style={styles.replyBtn}
-          onPress={() => KeyboardRegistry.onItemSelected('ReplySelector')}
+          onPress={() => KeyboardRegistry.onItemSelected(registeredScreens.ReplySelector)}
           testID="editRepliesButton"
         />
       </View>
@@ -65,4 +66,4 @@ function mapStateToProps() {
 
 const ConnectedReplySelector = connect(mapStateToProps)(ReplySelector);
 
-KeyboardRegistry.registerKeyboard('ReplySelector', () => ConnectedReplySelector);
+KeyboardRegistry.registerKeyboard(registeredScreens.ReplySelector, () => ConnectedReplySelector);

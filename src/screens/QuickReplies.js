@@ -2,6 +2,7 @@ import React, {PureComponent, PropTypes} from 'react';
 import {View, Text} from 'react-native-ui-lib';
 import {connect} from 'remx';
 import {KeyboardAccessoryView} from 'react-native-keyboard-input';
+import {registeredScreens} from '../constants/constants';
 
 import './ReplySelector';
 import './RepliesEditor';
@@ -24,7 +25,7 @@ class QuickReplies extends PureComponent {
           onFocus={() => keyboardStore.setters.setKeyboardScreen(undefined)}
           setRef={r => this.textInputRef = r}
           actionLabel="Choose a quick reply"
-          onPress={() => keyboardStore.setters.setKeyboardScreen('ReplySelector')}
+          onPress={() => keyboardStore.setters.setKeyboardScreen(registeredScreens.ReplySelector)}
           onKeyboardSend={description => repliesStore.setters.setSelectedReply({description})}
         />
       );
@@ -32,7 +33,7 @@ class QuickReplies extends PureComponent {
 
     onKeyboardItemSelected = () => {
       this.props.navigator.showModal({
-        screen: 'RepliesEditor',
+        screen: registeredScreens.RepliesEditor,
         title: 'Edit Replies'
       });
     }

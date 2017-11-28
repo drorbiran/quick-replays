@@ -3,9 +3,8 @@ import {ScrollView} from 'react-native';
 import {View, Button} from 'react-native-ui-lib';
 import ItemEditor from '../components/ItemEditor';
 import _ from 'lodash';
-
+import {registeredScreens} from '../constants/constants';
 import {connect} from 'remx';
-import {KeyboardRegistry} from 'react-native-keyboard-input';
 
 import * as repliesStore from '../stores/replies/replies.store';
 import * as repliesActions from '../stores/replies/replies.actions';
@@ -39,7 +38,7 @@ class RepliesEditor extends PureComponent {
 
   onAddPress = () => {
     this.props.navigator.showModal({
-      screen: 'AddReplyScreen',
+      screen: registeredScreens.AddReplyScreen,
       title: 'Add Reply'
     });
   }
@@ -47,8 +46,8 @@ class RepliesEditor extends PureComponent {
   onDeleteItem = key => {
     const newReplies = repliesActions.deleteReplyByKey(key, this.state.replies);
     this.setState(() => {
- return {replies: newReplies}; 
-});
+      return {replies: newReplies};
+    });
   }
 
 
@@ -78,8 +77,8 @@ class RepliesEditor extends PureComponent {
       }
     });
     this.setState(() => {
- return {replies: newReplies}; 
-});
+      return {replies: newReplies};
+    });
   }
 
   onDescriptionChange = (newDescription, key) => {
@@ -94,8 +93,8 @@ class RepliesEditor extends PureComponent {
       }
     });
     this.setState(() => {
- return {replies: newReplies}; 
-});
+      return {replies: newReplies};
+    });
   }
 
   render() {
@@ -159,5 +158,3 @@ function mapStateToProps() {
 }
 
 export default connect(mapStateToProps)(RepliesEditor);
-
-KeyboardRegistry.registerKeyboard('RepliesEditor', () => ConnectedRepliesEditor);

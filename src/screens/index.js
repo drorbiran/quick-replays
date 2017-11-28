@@ -1,4 +1,5 @@
 import {Navigation} from 'react-native-navigation';
+import {registeredScreens} from '../constants/constants';
 
 import QuickReplies from './QuickReplies';
 import RepliesEditor from './RepliesEditor';
@@ -6,7 +7,7 @@ import AddReplyScreen from './AddReplyScreen';
 
 
 export function registerScreens() {
-  Navigation.registerComponent('QuickReplies', () => QuickReplies);
-  Navigation.registerComponent('RepliesEditor', () => RepliesEditor);
-  Navigation.registerComponent('AddReplyScreen', () => AddReplyScreen);
+  Navigation.registerComponent(registeredScreens.QuickReplies, () => QuickReplies);
+  Navigation.registerComponent(registeredScreens.RepliesEditor, () => RepliesEditor);
+  Navigation.registerComponent(registeredScreens.AddReplyScreen, () => AddReplyScreen);
 }
