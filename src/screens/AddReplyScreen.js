@@ -65,8 +65,8 @@ class AddReplyScreen extends Component {
     }
 
 
-    onTitleChange = (newTitle) => {
-        this.setState({ title: newTitle });
+    onTitleChange = (title) => {
+        this.setState({title});
         this.updateAddBtn();
     }
 

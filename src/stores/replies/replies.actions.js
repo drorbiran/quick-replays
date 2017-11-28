@@ -1,6 +1,7 @@
 import * as repliesStore from './replies.store'
 import uuidv4 from 'uuid/v4'
 
+
 export function deleteReplyByKey(key, replies) {
     const replyIndex = replies.findIndex((reply) => reply.key === key);
     const newReplies = [
@@ -18,3 +19,4 @@ export function addNewReply(reply) {
     const newReplies = [...replies, newReply];
     repliesStore.setters.setReplies(newReplies);
 }
+

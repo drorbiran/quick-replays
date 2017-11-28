@@ -28,8 +28,6 @@ const state = remx.state(initialState);
 
 //#####################################
 // getters
-// All the functions that are going to return parts of the state should be wrapped within the Getters function.
-// The warpped getters functions shoud be defined inside the same store file and should be exported.
 //#####################################
 
 export const getters = remx.getters({
@@ -46,8 +44,6 @@ export const getters = remx.getters({
 
 //#####################################
 // setters
-// All the functions that are going to change parts of the state should be wrapped within the Setters function. 
-// The warpped setters functions shoud be defined inside the store and should be exported.
 //#####################################
 export const setters = remx.setters({
 
@@ -59,33 +55,5 @@ export const setters = remx.setters({
         console.log('set new replies', replies);
         state.replies = replies;
     },
-
-    setReplyTitle(key, newTitle) {
-        state.replies = state.replies.map((reply) => {
-            if (reply.key !== key) {
-                return reply
-            } else {
-                return {
-                    ...reply,
-                    ...{ title: newTitle }
-                }
-            }
-        })
-    },
-
-    setReplyDescription(key, newDescription) {
-        console.log('setDexription');
-        const newReplies = state.replies.map((reply) => {
-            if (reply.key !== key) {
-                return reply
-            } else {
-                return {
-                    ...reply,
-                    ...{ description: newDescription }
-                }
-            }
-        })
-        state.replies = newReplies;
-    }
 
 });
