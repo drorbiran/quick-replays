@@ -17,9 +17,9 @@ class ItemEditor extends PureComponent {
     render() {
         return (
             <View style={styles.containerStyle}>
-                <View style={{ flex: 1, flexDirection: 'row'}}>
+                <View style={styles.titleAndButtonContainer}>
                     <TextInput
-                        containerStyle={{flex: 1}}
+                        containerStyle={styles.titleInputStyle}
                         placeholder="Add your quick reply title"
                         value={this.props.title}
                         onChangeText={(newTitle) => this.props.onTitleChange(newTitle, this.props.itemKey)}
@@ -60,6 +60,13 @@ const styles = {
         borderRadius: 12,
         borderWidth: 1,
         borderColor: '#C2C7CB'
+    },
+    titleAndButtonContainer: { 
+        flex: 1, 
+        flexDirection: 'row' 
+    },
+    titleInputStyle: {
+        flex: 1
     }
 }
 

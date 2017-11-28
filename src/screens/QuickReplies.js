@@ -36,8 +36,8 @@ class QuickReplies extends PureComponent {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                <Text center dark10 text60 style={{ marginTop: 48 }}>
+            <View style={styles.container}>
+                <Text center dark10 text60 style={styles.replyText}>
                     {this.props.selectedReply.description}
                 </Text>
                 <KeyboardAccessoryView
@@ -48,6 +48,16 @@ class QuickReplies extends PureComponent {
                 />
             </View>
         );
+    }
+}
+
+const styles = {
+    container: {
+        flex: 1,
+        justifyContent: 'space-between'
+    },
+    replyText: {
+        marginTop: 48
     }
 }
 

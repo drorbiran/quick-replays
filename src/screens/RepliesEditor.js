@@ -97,7 +97,7 @@ class RepliesEditor extends PureComponent {
             size="medium"
             outline
             outlineColor='#84D3A0'
-            style={{ marginBottom: 20 }}
+            style={styles.buttonStyle}
             onPress={this.onAddPress}
             testID="addButton"
           />
@@ -106,7 +106,7 @@ class RepliesEditor extends PureComponent {
             size="medium"
             outline
             outlineColor='#F57871'
-            style={{ marginBottom: 20 }}
+            style={styles.buttonStyle}
             testID="cancelButton"
             onPress={this.onCancelPress}
           />
@@ -115,7 +115,7 @@ class RepliesEditor extends PureComponent {
             size="medium"
             outline
             outlineColor='#57a8ef'
-            style={{ marginBottom: 20 }}
+            style={styles.buttonStyle}
             testID="saveButton"
             onPress={this.onSavePress}
           />
@@ -130,11 +130,12 @@ const styles = {
     flex: 1,
     backgroundColor: 'white'
   },
-
   buttonsContainer: {
     marginTop: 24
+  },
+  buttonStyle: {
+    marginBottom: 12
   }
-
 };
 
 function mapStateToProps() {

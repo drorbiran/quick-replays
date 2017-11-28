@@ -31,7 +31,7 @@ class ReplySelector extends PureComponent {
           size="medium"
           outline
           outlineColor='#57a8ef'
-          style={{ marginBottom: 20 }}
+          style={styles.replyBtn}
           onPress={() => KeyboardRegistry.onItemSelected('ReplySelector')}
           testID="editRepliesButton"
         />
@@ -47,6 +47,9 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'white'
   },
+  replyBtn: {
+    marginBottom: 20
+  }
 };
 
 function mapStateToProps() {

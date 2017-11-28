@@ -89,7 +89,7 @@ class AddReplyScreen extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={styles.pageStyle}>
                 <View style={styles.containerStyle}>
                     <TextInput
                         placeholder="Add your quick reply title"
@@ -114,6 +114,10 @@ class AddReplyScreen extends Component {
 }
 
 const styles = {
+    pageStyle: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
     containerStyle: {
         marginTop: 24,
         marginLeft: 12,
