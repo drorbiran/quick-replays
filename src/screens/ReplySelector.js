@@ -3,33 +3,28 @@ import {View, Button} from 'react-native-ui-lib';
 import {connect} from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 import {registeredScreens} from '../constants/constants';
+import ButtonsList from '../constants/ButtonsList';
 
 import * as repliesStore from '../stores/replies/replies.store';
 
 class ReplySelector extends PureComponent {
 
   static propTypes = {
-    replies: PropTypes.object,
+    replies: PropTypes.array,
     navigator: PropTypes.object
   };
 
-  renderAvailableReplies = () => {
-    return this.props.replies.map(reply => {
-      return (<Button
-        label={reply.title}
-        size="small"
-        link
-        testID={reply.key}
-        key={reply.key}
-        onPress={() => repliesStore.setters.setSelectedReply(reply)}
-      />);
-    });
+  handleReplyPress = reply => {
+    repliesStore.setters.setSelectedReply(reply);
   }
 
   render() {
     return (
       <View style={styles.container} testID="replySelector" >
-        {this.renderAvailableReplies()}
+        <ButtonsList
+          buttonsList={this.props.replies}
+          onPress={this.handleReplyPress}
+        />
         <Button
           blue40
           bottom

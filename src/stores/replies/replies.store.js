@@ -52,7 +52,6 @@ export const setters = remx.setters({
   },
 
   setReplies(replies) {
-    console.log('set new replies', replies);
     state.replies = replies;
   },
 

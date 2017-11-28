@@ -14,7 +14,7 @@ import * as keyboardStore from '../stores/keyboard/keyboard.store';
 class QuickReplies extends PureComponent {
 
     static propTypes = {
-      navigator: PropTypes.func,
+      navigator: PropTypes.object,
       selectedReply: PropTypes.object,
       keyBoardScreen: PropTypes.string
     };
