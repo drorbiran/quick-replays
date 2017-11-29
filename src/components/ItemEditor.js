@@ -12,6 +12,10 @@ class ItemEditor extends PureComponent {
       itemKey: PropTypes.string
     };
 
+    onDeleteItem = () => {
+      this.props.onDeleteItem(this.props.itemKey);
+    }
+
     render() {
       return (
         <View style={styles.containerStyle}>
@@ -31,7 +35,7 @@ class ItemEditor extends PureComponent {
                 size="small"
                 link
                 color="#F57871"
-                onPress={() => this.props.onDeleteItem(this.props.itemKey)}
+                onPress={this.onDeleteItem}
                 testID={`${this.props.itemKey}Delete`}
               />
             </View>

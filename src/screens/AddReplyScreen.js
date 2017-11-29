@@ -43,7 +43,7 @@ class AddReplyScreen extends Component {
     }
 
     onNavigatorEvent = event => {
-      if (event.type == 'NavBarButtonPress') {
+      if (event.type === 'NavBarButtonPress') {
         switch (event.id) {
           case 'add':
             this.onAddPress();
@@ -64,26 +64,21 @@ class AddReplyScreen extends Component {
     }
 
 
-    onTitleChange = title => {
-      this.setState({title});
+    onTitleChange = async title => {
+      await this.setState({title});
       this.updateAddBtn();
     }
 
 
-    onDescriptionChange = newDescription => {
-      this.setState({description: newDescription});
+    onDescriptionChange = async description => {
+      await this.setState({description});
       this.updateAddBtn();
     }
 
     updateAddBtn() {
-      const titleLength = this.state.title && this.state.title.length;
-      const descriptionLength = this.state.description && this.state.description.length;
-      const enabledAdd = ((titleLength > 0) && (descriptionLength > 0));
-      if (enabledAdd) {
-        this.updateButtons(false);
-      } else {
-        this.updateButtons(true);
-      }
+      const {title, description} = this.state;
+      const enabledAdd = title && description;
+      this.updateButtons(!enabledAdd);
     }
 
     render() {

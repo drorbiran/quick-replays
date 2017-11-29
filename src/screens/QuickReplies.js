@@ -22,13 +22,25 @@ class QuickReplies extends PureComponent {
     keyboardToolbarContent = () => {
       return (
         <KeyboardToolBar
-          onFocus={() => keyboardStore.setters.setKeyboardScreen(undefined)}
+          onFocus={this.resetKeyboard}
           setRef={r => this.textInputRef = r}
           actionLabel="Choose a quick reply"
-          onPress={() => keyboardStore.setters.setKeyboardScreen(registeredScreens.ReplySelector)}
-          onKeyboardSend={description => repliesStore.setters.setSelectedReply({description})}
+          onPress={this.openRepliesKeyboard}
+          onKeyboardSend={this.onKeyboardSend}
         />
       );
+    }
+
+    resetKeyboard = () => {
+      keyboardStore.setters.setKeyboardScreen(undefined);
+    }
+
+    openRepliesKeyboard = () => {
+      keyboardStore.setters.setKeyboardScreen(registeredScreens.ReplySelector);
+    }
+
+    onKeyboardSend = description => {
+      repliesStore.setters.setSelectedReply({description});
     }
 
     onKeyboardItemSelected = () => {

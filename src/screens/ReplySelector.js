@@ -3,7 +3,7 @@ import {View, Button} from 'react-native-ui-lib';
 import {connect} from 'remx';
 import {KeyboardRegistry} from 'react-native-keyboard-input';
 import {registeredScreens} from '../constants/constants';
-import ButtonsList from '../constants/ButtonsList';
+import ButtonsList from '../components/ButtonsList';
 
 import * as repliesStore from '../stores/replies/replies.store';
 
@@ -16,6 +16,10 @@ class ReplySelector extends PureComponent {
 
   handleReplyPress = reply => {
     repliesStore.setters.setSelectedReply(reply);
+  }
+
+  onEditPress = () => {
+    KeyboardRegistry.onItemSelected(registeredScreens.ReplySelector)
   }
 
   render() {
@@ -33,13 +37,15 @@ class ReplySelector extends PureComponent {
           outline
           outlineColor="#57a8ef"
           style={styles.replyBtn}
-          onPress={() => KeyboardRegistry.onItemSelected(registeredScreens.ReplySelector)}
+          onPress={this.onEditPress}
           testID="editRepliesButton"
         />
       </View>
     );
   }
 }
+
+
 
 const styles = {
   container: {

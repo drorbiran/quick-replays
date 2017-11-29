@@ -29,9 +29,7 @@ class RepliesEditor extends PureComponent {
   }
 
   onCancelPress = () => {
-    this.setState(() => {
-      this.props.replies;
-    });
+    this.setState(this.props.replies);
     keyboardStore.setters.setKeyboardScreen(undefined);
     this.props.navigator.dismissModal({animationType: 'slide-down'});
   }
@@ -45,9 +43,7 @@ class RepliesEditor extends PureComponent {
 
   onDeleteItem = key => {
     const newReplies = repliesActions.deleteReplyByKey(key, this.state.replies);
-    this.setState(() => {
-      return {replies: newReplies};
-    });
+    this.setState({replies: newReplies});
   }
 
 
@@ -65,14 +61,14 @@ class RepliesEditor extends PureComponent {
     });
   }
 
-  onTitleChange = (newTitle, key) => {
+  onTitleChange = (title, key) => {
     const newReplies = this.state.replies.map(reply => {
       if (reply.key !== key) {
         return reply;
       } else {
         return {
           ...reply,
-          ...{title: newTitle}
+          ...{title}
         };
       }
     });
@@ -81,14 +77,14 @@ class RepliesEditor extends PureComponent {
     });
   }
 
-  onDescriptionChange = (newDescription, key) => {
+  onDescriptionChange = (description, key) => {
     const newReplies = this.state.replies.map(reply => {
       if (reply.key !== key) {
         return reply;
       } else {
         return {
           ...reply,
-          ...{description: newDescription}
+          ...{description}
         };
       }
     });
