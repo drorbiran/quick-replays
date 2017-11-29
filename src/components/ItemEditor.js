@@ -16,7 +16,7 @@ class ItemEditor extends PureComponent {
         <Card
           containerStyle={styles.containerStyle} 
           onPress={() => this.props.onItemPress(item)}
-          testID={`reply${key}`}
+          testID={`${key}-item`}
         >
           <Card.Section body>
             <Card.Section>
@@ -32,7 +32,7 @@ class ItemEditor extends PureComponent {
               <Card.Item>
                 <Button
                   label="edit" link text70 style={styles.editBtnStyle}
-                  testID={`reply${key}EditBtn`}
+                  testID={`${key}-reply-edit-btn`}
                   onPress={() => this.props.onEditItem(item)}
                 />
               </Card.Item>

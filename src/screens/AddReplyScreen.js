@@ -28,7 +28,7 @@ class AddReplyScreen extends Component {
           {
             title: 'Add',
             id: 'add',
-            testID: 'addBtn',
+            testID: 'add-btn',
             disabled: disableAdd
           }
         ],
@@ -36,7 +36,7 @@ class AddReplyScreen extends Component {
           {
             title: 'Cancel',
             id: 'cancel',
-            testID: 'cancelBtn'
+            testID: 'cancel-btn'
           }
         ]
       });
@@ -90,7 +90,7 @@ class AddReplyScreen extends Component {
               value={this.state.title}
               onChangeText={this.onTitleChange}
               maxLength={42}
-              testID="newTitleInput"
+              testID="title-input"
             />
             <TextInput
               placeholder="Add your quick reply content"
@@ -99,7 +99,7 @@ class AddReplyScreen extends Component {
               onChangeText={this.onDescriptionChange}
               blurOnSubmit
               maxLength={420}
-              testID="newDescriptionInput"
+              testID="description-input"
             />
           </View>
         </View>

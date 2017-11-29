@@ -22,7 +22,7 @@ class RepliesEditor extends PureComponent {
       {
         title: 'back',
         id: 'back',
-        testId: 'backBtn'
+        testId: 'back-btn'
       }
     ]
   }
@@ -93,7 +93,7 @@ class RepliesEditor extends PureComponent {
             outlineColor="#84D3A0"
             style={styles.buttonStyle}
             onPress={this.onAddPress}
-            testID="addButton"
+            testID="add-new-reply-btn"
           />
         </View>
       </ScrollView>

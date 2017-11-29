@@ -38,7 +38,7 @@ class ReplySelector extends PureComponent {
           outlineColor="#57a8ef"
           style={styles.replyBtn}
           onPress={this.onEditPress}
-          testID="editRepliesButton"
+          testID="open-replies-editor"
         />
       </View>
     );

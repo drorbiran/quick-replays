@@ -29,7 +29,7 @@ class EditReplyScreen extends Component {
           {
             title: 'Save',
             id: 'save',
-            testID: 'saveBtn',
+            testID: 'save-btn',
             disabled: disableSave
           }
         ],
@@ -37,7 +37,7 @@ class EditReplyScreen extends Component {
           {
             title: 'Cancel',
             id: 'cancel',
-            testID: 'cancelBtn'
+            testID: 'cancel-btn'
           }
         ]
       });
@@ -95,7 +95,7 @@ class EditReplyScreen extends Component {
               value={this.state.title}
               onChangeText={this.onTitleChange}
               maxLength={42}
-              testID="newTitleInput"
+              testID="title-input"
             />
             <TextInput
               placeholder="Add your quick reply content"
@@ -104,13 +104,13 @@ class EditReplyScreen extends Component {
               onChangeText={this.onDescriptionChange}
               blurOnSubmit
               maxLength={420}
-              testID="newDescriptionInput"
+              testID="description-input"
             />
           </View>
           <Button
             bottom
             center
-            testID="deleteBtn"
+            testID="delete-btn"
             label="Delete"
             backgroundColor={Colors.red40}
             onPress={this.onDeletePress}

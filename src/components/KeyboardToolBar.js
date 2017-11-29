@@ -34,7 +34,7 @@ class KeyboardToolBar extends PureComponent {
           />
           <Button
             center
-            testID="action1"
+            testID="open-replies-keyboard-bth"
             label={this.props.actionLabel}
             onPress={this.props.onPress}
             size="small"
