@@ -1,13 +1,14 @@
-import React, {PureComponent, PropTypes} from 'react';
-import {ScrollView} from 'react-native';
-import {View, Button} from 'react-native-ui-lib';
-import ItemEditor from '../components/ItemEditor';
-import _ from 'lodash';
-import {registeredScreens} from '../constants/constants';
-import {connect} from 'remx';
+const React = require('react');
+const {PureComponent, PropTypes} = require('react');
+const {ScrollView} = require('react-native');
+const {View, Button} = require('react-native-ui-lib');
+const ItemEditor = require('../components/ItemEditor');
+const _ = require('lodash');
+const {registeredScreens} = require('../constants/constants');
+const {connect} = require('remx');
 
-import * as repliesStore from '../stores/replies/replies.store';
-import * as keyboardStore from '../stores/keyboard/keyboard.store';
+const repliesStore = require('../stores/replies/replies.store');
+const keyboardStore = require('../stores/keyboard/keyboard.store');
 
 
 class RepliesEditor extends PureComponent {
@@ -120,4 +121,4 @@ function mapStateToProps() {
   };
 }
 
-export default connect(mapStateToProps)(RepliesEditor);
+module.exports = connect(mapStateToProps)(RepliesEditor);

@@ -1,5 +1,6 @@
-import React, {PureComponent, PropTypes} from 'react';
-import {View, TextInput, Button} from 'react-native-ui-lib';
+const React = require('react');
+const {PureComponent, PropTypes} = require('react');
+const {View, TextInput, Button} = require('react-native-ui-lib');
 
 class KeyboardToolBar extends PureComponent {
 
@@ -45,4 +46,4 @@ class KeyboardToolBar extends PureComponent {
     }
 }
 
-export default KeyboardToolBar;
+module.exports = KeyboardToolBar;

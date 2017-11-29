@@ -1,10 +1,10 @@
-import {Navigation} from 'react-native-navigation';
-import {registeredScreens} from '../constants/constants';
+const {Navigation} = require('react-native-navigation');
+const {registeredScreens} = require('../constants/constants');
 
-import QuickReplies from './QuickReplies';
-import RepliesEditor from './RepliesEditor';
-import AddReplyScreen from './AddReplyScreen';
-import EditReplyScreen from './EditReplyScreen';
+const QuickReplies = require('./QuickReplies');
+const RepliesEditor = require('./RepliesEditor');
+const AddReplyScreen = require('./AddReplyScreen');
+const EditReplyScreen = require('./EditReplyScreen');
 
 
 export function registerScreens() {

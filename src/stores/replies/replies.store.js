@@ -1,4 +1,4 @@
-import * as remx from 'remx';
+const remx = require('remx');
 
 const initialState = {
   selectedReply: {
@@ -30,7 +30,7 @@ const state = remx.state(initialState);
 // getters
 //#####################################
 
-export const getters = remx.getters({
+const getters = remx.getters({
 
   getSelectedReply() {
     return state.selectedReply;
@@ -45,7 +45,7 @@ export const getters = remx.getters({
 //#####################################
 // setters
 //#####################################
-export const setters = remx.setters({
+const setters = remx.setters({
 
   setSelectedReply(reply) {
     state.selectedReply = reply;
@@ -56,3 +56,8 @@ export const setters = remx.setters({
   },
 
 });
+
+module.exports = {
+  getters,
+  setters
+};

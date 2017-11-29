@@ -1,15 +1,16 @@
-import React, {PureComponent, PropTypes} from 'react';
-import {View, Text} from 'react-native-ui-lib';
-import {connect} from 'remx';
-import {KeyboardAccessoryView} from 'react-native-keyboard-input';
-import {registeredScreens} from '../constants/constants';
+const React = require('react');
+const {PureComponent, PropTypes} = require('react');
+const {View, Text} = require('react-native-ui-lib');
+const {connect} = require('remx');
+const {KeyboardAccessoryView} = require('react-native-keyboard-input');
+const {registeredScreens} = require('../constants/constants');
 
-import './ReplySelector';
-import './RepliesEditor';
-import KeyboardToolBar from '../components/KeyboardToolBar';
+require('./ReplySelector');
+require('./RepliesEditor');
+const KeyboardToolBar = require('../components/KeyboardToolBar');
 
-import * as repliesStore from '../stores/replies/replies.store';
-import * as keyboardStore from '../stores/keyboard/keyboard.store';
+const repliesStore = require('../stores/replies/replies.store');
+const keyboardStore = require('../stores/keyboard/keyboard.store');
 
 class QuickReplies extends PureComponent {
 
@@ -84,4 +85,4 @@ function mapStateToProps() {
   };
 }
 
-export default connect(mapStateToProps)(QuickReplies);
+module.exports = connect(mapStateToProps)(QuickReplies);

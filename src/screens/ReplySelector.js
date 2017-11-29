@@ -1,11 +1,12 @@
-import React, {PureComponent, PropTypes} from 'react';
-import {View, Button} from 'react-native-ui-lib';
-import {connect} from 'remx';
-import {KeyboardRegistry} from 'react-native-keyboard-input';
-import {registeredScreens} from '../constants/constants';
-import ButtonsList from '../components/ButtonsList';
+const React = require('react');
+const {PureComponent, PropTypes} = require('react');
+const {View, Button} = require('react-native-ui-lib');
+const {connect} = require('remx');
+const {KeyboardRegistry} = require('react-native-keyboard-input');
+const {registeredScreens} = require('../constants/constants');
+const ButtonsList = require('../components/ButtonsList');
 
-import * as repliesStore from '../stores/replies/replies.store';
+const repliesStore = require('../stores/replies/replies.store');
 
 class ReplySelector extends PureComponent {
 

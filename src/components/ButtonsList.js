@@ -1,5 +1,6 @@
-import React, {PureComponent, PropTypes} from 'react';
-import {Button, View, Text} from 'react-native-ui-lib';
+const React = require('react');
+const {PureComponent, PropTypes} = require('react');
+const {Button, View} = require('react-native-ui-lib');
 
 
 class ButtonsList extends PureComponent {
@@ -38,4 +39,4 @@ const styles = {
   }
 };
 
-export default ButtonsList;
+module.exports = ButtonsList;

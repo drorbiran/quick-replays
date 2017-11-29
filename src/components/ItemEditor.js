@@ -1,5 +1,6 @@
-import React, {PureComponent, PropTypes} from 'react';
-import { Button, Card, Text} from 'react-native-ui-lib';
+const React = require('react');
+const {PureComponent, PropTypes} = require('react');
+const {Button, Card, Text} = require('react-native-ui-lib');
 
 class ItemEditor extends PureComponent {
 
@@ -55,4 +56,4 @@ const styles = {
   }
 };
 
-export default ItemEditor;
+module.exports = ItemEditor;

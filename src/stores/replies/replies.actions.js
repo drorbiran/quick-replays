@@ -1,8 +1,8 @@
-import * as repliesStore from './replies.store';
-import uuidv4 from 'uuid/v4';
+const repliesStore = require('./replies.store');
+const uuidv4 = require('uuid/v4');
 
 
-export function deleteReplyByKey(key) {
+function deleteReplyByKey(key) {
   const replies = repliesStore.getters.getReplies();  
   const replyIndex = replies.findIndex(reply => reply.key === key);
   const newReplies = [
@@ -12,7 +12,7 @@ export function deleteReplyByKey(key) {
   repliesStore.setters.setReplies(newReplies);
 }
 
-export function addNewReply(reply) {
+function addNewReply(reply) {
   const key = uuidv4();
   const newReply = {...reply, key};
   const replies = repliesStore.getters.getReplies();
@@ -20,7 +20,7 @@ export function addNewReply(reply) {
   repliesStore.setters.setReplies(newReplies);
 }
 
-export function updateReply(updatedReply) {
+function updateReply(updatedReply) {
   const replies = repliesStore.getters.getReplies();
   const newReplies = replies.map(reply => {
     if (reply.key !== updatedReply.key) {
@@ -34,3 +34,14 @@ export function updateReply(updatedReply) {
   });
   repliesStore.setters.setReplies(newReplies);
 }
+
+function sum(a, b) {
+  return a + b;
+}
+
+module.exports = {
+  deleteReplyByKey,
+  addNewReply,
+  updateReply,
+  sum
+};

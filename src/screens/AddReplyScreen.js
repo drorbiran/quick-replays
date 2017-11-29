@@ -1,8 +1,9 @@
-import React, {Component, PropTypes} from 'react';
-import {View, TextInput} from 'react-native-ui-lib';
+const React = require('react');
+const {Component, PropTypes} = require('react');
+const {View, TextInput} = require('react-native-ui-lib');
 
-import * as repliesActions from '../stores/replies/replies.actions';
-import * as keyboardStore from '../stores/keyboard/keyboard.store';
+const repliesActions = require('../stores/replies/replies.actions');
+const keyboardStore = require('../stores/keyboard/keyboard.store');
 
 class AddReplyScreen extends Component {
 
@@ -123,4 +124,4 @@ const styles = {
   }
 };
 
-export default AddReplyScreen;
+module.exports = AddReplyScreen;
