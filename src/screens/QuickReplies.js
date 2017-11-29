@@ -46,7 +46,7 @@ class QuickReplies extends PureComponent {
     onKeyboardItemSelected = () => {
       this.props.navigator.showModal({
         screen: registeredScreens.RepliesEditor,
-        title: 'Edit Replies'
+        title: 'Edit Replies',
       });
     }
 

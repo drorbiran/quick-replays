@@ -1,18 +1,19 @@
 import React, {Component, PropTypes} from 'react';
-import {View, TextInput} from 'react-native-ui-lib';
+import {View, TextInput, Button, Colors} from 'react-native-ui-lib';
 
 import * as repliesActions from '../stores/replies/replies.actions';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
-class AddReplyScreen extends Component {
+class EditReplyScreen extends Component {
 
     state = {
-      title: '',
-      description: '',
+      title: this.props.reply.title,
+      description: this.props.reply.description,
     }
 
     static propTypes = {
-      navigator: PropTypes.object
+      navigator: PropTypes.object,
+      reply: PropTypes.object
     }
 
     constructor(props) {
@@ -22,14 +23,14 @@ class AddReplyScreen extends Component {
       this.updateButtons(true);
     }
 
-    updateButtons = disableAdd => {
+    updateButtons = disableSave => {
       this.props.navigator.setButtons({
         rightButtons: [
           {
-            title: 'Add',
-            id: 'add',
-            testID: 'addBtn',
-            disabled: disableAdd
+            title: 'Save',
+            id: 'save',
+            testID: 'saveBtn',
+            disabled: disableSave
           }
         ],
         leftButtons: [
@@ -45,8 +46,8 @@ class AddReplyScreen extends Component {
     onNavigatorEvent = event => {
       if (event.type === 'NavBarButtonPress') {
         switch (event.id) {
-          case 'add':
-            this.onAddPress();
+          case 'save':
+            this.onSavePress();
             break;
           case 'cancel':
             this.props.navigator.dismissModal({animationType: 'slide-down'});
@@ -57,28 +58,32 @@ class AddReplyScreen extends Component {
       }
     }
 
-    onAddPress = () => {
-      repliesActions.addNewReply(this.state);
+    onSavePress = () => {
+      repliesActions.updateReply({...this.props.reply, ...this.state});
       keyboardStore.setters.setKeyboardScreen(undefined);
       this.props.navigator.dismissModal({animationType: 'slide-down'});
     }
 
+    onDeletePress = () => {
+      repliesActions.deleteReplyByKey(this.props.reply.key);
+      keyboardStore.setters.setKeyboardScreen(undefined);
+      this.props.navigator.dismissModal({animationType: 'slide-down'});
+    }
 
     onTitleChange = async title => {
       await this.setState({title});
-      this.updateAddBtn();
+      this.updateEditBtn();
     }
-
 
     onDescriptionChange = async description => {
       await this.setState({description});
-      this.updateAddBtn();
+      this.updateEditBtn();
     }
 
-    updateAddBtn() {
+    updateEditBtn() {
       const {title, description} = this.state;
-      const enabledAdd = title && description;
-      this.updateButtons(!enabledAdd);
+      const disableSave = ((title === this.props.reply.title) && (description === this.props.reply.description));
+      this.updateButtons(disableSave);
     }
 
     render() {
@@ -102,6 +107,16 @@ class AddReplyScreen extends Component {
               testID="newDescriptionInput"
             />
           </View>
+          <Button
+            bottom
+            center
+            testID="deleteBtn"
+            label="Delete"
+            backgroundColor={Colors.red40}
+            onPress={this.onDeletePress}
+            size="small"
+            fullWidth
+          />
         </View>
       );
     }
@@ -110,7 +125,8 @@ class AddReplyScreen extends Component {
 const styles = {
   pageStyle: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    justifyContent: 'space-between'
   },
   containerStyle: {
     marginTop: 24,
@@ -123,4 +139,4 @@ const styles = {
   }
 };
 
-export default AddReplyScreen;
+export default EditReplyScreen;

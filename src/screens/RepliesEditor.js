@@ -7,29 +7,41 @@ import {registeredScreens} from '../constants/constants';
 import {connect} from 'remx';
 
 import * as repliesStore from '../stores/replies/replies.store';
-import * as repliesActions from '../stores/replies/replies.actions';
 import * as keyboardStore from '../stores/keyboard/keyboard.store';
 
 
 class RepliesEditor extends PureComponent {
 
-  state = {
-    replies: this.props.replies
-  }
-
   static propTypes = {
-    replies: PropTypes.object,
+    replies: PropTypes.array,
     navigator: PropTypes.object
   };
 
-  onSavePress = () => {
-    repliesStore.setters.setReplies(this.state.replies);
-    keyboardStore.setters.setKeyboardScreen(undefined);
-    this.props.navigator.dismissModal({animationType: 'slide-down'});
+  static navigatorButtons = {
+    leftButtons: [
+      {
+        title: 'back',
+        id: 'back',
+        testId: 'backBtn'
+      }
+    ]
   }
 
-  onCancelPress = () => {
-    this.setState(this.props.replies);
+  constructor(props) {
+    super(props);
+
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));    
+  }
+
+  onNavigatorEvent(event) {
+    if (event.type === 'NavBarButtonPress') {
+      if (event.id === 'back') {
+        this.onBackPress();
+      }
+    }
+  }
+
+  onBackPress = () => {
     keyboardStore.setters.setKeyboardScreen(undefined);
     this.props.navigator.dismissModal({animationType: 'slide-down'});
   }
@@ -41,55 +53,30 @@ class RepliesEditor extends PureComponent {
     });
   }
 
-  onDeleteItem = key => {
-    const newReplies = repliesActions.deleteReplyByKey(key, this.state.replies);
-    this.setState({replies: newReplies});
+  onEditItem = reply => {
+    this.props.navigator.showModal({
+      screen: registeredScreens.EditReplyScreen,
+      title: 'Edit Reply',
+      passProps: {reply}
+    });
+  }
+
+  onReplyPress = reply => {
+    repliesStore.setters.setSelectedReply(reply);
+    keyboardStore.setters.setKeyboardScreen(undefined);
+    this.props.navigator.dismissModal({animationType: 'slide-down'});
   }
 
 
   renderReplies = () => {
-    return this.state.replies.map(({key, title, description}) => {
+    return this.props.replies.map(reply => {
       return (<ItemEditor
-        title={title}
-        description={description}
-        onTitleChange={_.debounce(this.onTitleChange, 300)}
-        onDescriptionChange={_.debounce(this.onDescriptionChange, 300)}
+        item={reply}
+        onEditItem={this.onEditItem}
         onDeleteItem={this.onDeleteItem}
-        itemKey={key}
-        key={key}
+        key={reply.key}
+        onItemPress={this.onReplyPress}
       />);
-    });
-  }
-
-  onTitleChange = (title, key) => {
-    const newReplies = this.state.replies.map(reply => {
-      if (reply.key !== key) {
-        return reply;
-      } else {
-        return {
-          ...reply,
-          ...{title}
-        };
-      }
-    });
-    this.setState(() => {
-      return {replies: newReplies};
-    });
-  }
-
-  onDescriptionChange = (description, key) => {
-    const newReplies = this.state.replies.map(reply => {
-      if (reply.key !== key) {
-        return reply;
-      } else {
-        return {
-          ...reply,
-          ...{description}
-        };
-      }
-    });
-    this.setState(() => {
-      return {replies: newReplies};
     });
   }
 
@@ -107,26 +94,6 @@ class RepliesEditor extends PureComponent {
             style={styles.buttonStyle}
             onPress={this.onAddPress}
             testID="addButton"
-          />
-          <Button
-            red40
-            label="Cancel"
-            size="medium"
-            outline
-            outlineColor="#F57871"
-            style={styles.buttonStyle}
-            testID="cancelButton"
-            onPress={this.onCancelPress}
-          />
-          <Button
-            blue40
-            label="Save"
-            size="medium"
-            outline
-            outlineColor="#57a8ef"
-            style={styles.buttonStyle}
-            testID="saveButton"
-            onPress={this.onSavePress}
           />
         </View>
       </ScrollView>

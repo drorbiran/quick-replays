@@ -19,7 +19,7 @@ class ReplySelector extends PureComponent {
   }
 
   onEditPress = () => {
-    KeyboardRegistry.onItemSelected(registeredScreens.ReplySelector)
+    KeyboardRegistry.onItemSelected(registeredScreens.ReplySelector);
   }
 
   render() {
@@ -44,8 +44,6 @@ class ReplySelector extends PureComponent {
     );
   }
 }
-
-
 
 const styles = {
   container: {

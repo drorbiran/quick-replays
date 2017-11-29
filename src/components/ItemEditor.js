@@ -1,75 +1,57 @@
 import React, {PureComponent, PropTypes} from 'react';
-import {View, TextInput, Button} from 'react-native-ui-lib';
+import { Button, Card, Text} from 'react-native-ui-lib';
 
 class ItemEditor extends PureComponent {
 
     static propTypes = {
-      title: PropTypes.string,
-      description: PropTypes.string,
-      onTitleChange: PropTypes.func,
-      onDescriptionChange: PropTypes.func,
-      onDeleteItem: PropTypes.func,
-      itemKey: PropTypes.string
+      item: PropTypes.object,
+      onItemPress: PropTypes.func,
+      onEditItem: PropTypes.func
     };
 
-    onDeleteItem = () => {
-      this.props.onDeleteItem(this.props.itemKey);
-    }
-
     render() {
+      const {item} = this.props;
+      const {title, description, key} = item;
       return (
-        <View style={styles.containerStyle}>
-          <View style={styles.titleAndButtonContainer}>
-            <TextInput
-              containerStyle={styles.titleInputStyle}
-              placeholder="Add your quick reply title"
-              value={this.props.title}
-              onChangeText={newTitle => this.props.onTitleChange(newTitle, this.props.itemKey)}
-              maxLength={42}
-              testID={this.props.itemKey}
-            />
-            <View>
-              <Button
-                blue40 bottom
-                label="Delete"
-                size="small"
-                link
-                color="#F57871"
-                onPress={this.onDeleteItem}
-                testID={`${this.props.itemKey}Delete`}
-              />
-            </View>
-          </View>
-          <TextInput
-            placeholder="Add your click reply content"
-            multiline
-            value={this.props.description}
-            onChangeText={newDescription => this.props.onDescriptionChange(newDescription, this.props.itemKey)}
-            blurOnSubmit
-            maxLength={420}
-            testID={this.props.itemKey + 'Description'}
-          />
-        </View>
+        <Card
+          containerStyle={styles.containerStyle} 
+          onPress={() => this.props.onItemPress(item)}
+          testID={`reply${key}`}
+        >
+          <Card.Section body>
+            <Card.Section>
+              <Text text50 dark30>{title}</Text>
+            </Card.Section>
+            <Card.Section>
+              <Text text70 dark40>
+                {description}
+              </Text>
+            </Card.Section>
+            <Card.Section footer>
+              <Text/>
+              <Card.Item>
+                <Button
+                  label="edit" link text70 style={styles.editBtnStyle}
+                  testID={`reply${key}EditBtn`}
+                  onPress={() => this.props.onEditItem(item)}
+                />
+              </Card.Item>
+            </Card.Section>
+          </Card.Section>
+        </Card>
       );
     }
 }
 
 const styles = {
   containerStyle: {
-    marginTop: 24,
+    marginTop: 12,
     marginLeft: 12,
     marginRight: 12,
     padding: 12,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#C2C7CB'
   },
-  titleAndButtonContainer: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  titleInputStyle: {
-    flex: 1
+  editBtnStyle: {
+    marginRight: 10
   }
 };
 
