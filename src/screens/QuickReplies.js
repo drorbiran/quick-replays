@@ -79,7 +79,7 @@ const styles = {
     marginTop: 120
   },
   textContainer: {
-    justifyContent:'center', 
+    justifyContent: 'center',
     flex: 1
   }
 };

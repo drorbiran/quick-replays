@@ -1,6 +1,7 @@
 const React = require('react');
 const {PureComponent, PropTypes} = require('react');
-const {View, TextInput, Button, Colors} = require('react-native-ui-lib');
+const {View, Button, Colors} = require('react-native-ui-lib');
+const { TextInput } = require('react-native');
 
 class KeyboardToolBar extends PureComponent {
 
@@ -23,16 +24,27 @@ class KeyboardToolBar extends PureComponent {
 
     render() {
       return (
-        <View style={{backgroundColor: Colors.dark80}}>
-          <TextInput
-            placeholder="Type Your Message"
-            onFocus={this.props.onFocus}
-            ref={r => this.props.setRef(r)}
-            returnKeyType="send"
-            value={this.state.text}
-            onChangeText={text => this.setState({text})}
-            onSubmitEditing={this.handleSubmit}
-          />
+        <View style={styles.KeyboardToolBarContainer}>
+          <View style={styles.TextInputContainer}>
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder="Type Your Message"
+              onFocus={this.props.onFocus}
+              ref={r => this.props.setRef(r)}
+              value={this.state.text}
+              onChangeText={text => this.setState({text})}
+            />
+            <View style={styles.buttonContainer}>
+              <Button
+                label="Send"
+                right
+                link
+                size="small"
+                center
+                onPress={this.handleSubmit}
+              />
+            </View>
+          </View>
           <Button
             center
             testID="open-replies-keyboard-bth"
@@ -44,6 +56,24 @@ class KeyboardToolBar extends PureComponent {
         </View>
       );
     }
+}
+
+const styles = {
+  KeyboardToolBarContainer: {
+    backgroundColor: Colors.dark80
+  },
+  TextInputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 12
+  },
+  textInputStyle: {
+    flex: 1,
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 }
 
 module.exports = KeyboardToolBar;

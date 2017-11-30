@@ -3,7 +3,8 @@ const uuidv4 = require('uuid/v4');
 
 
 function deleteReplyByKey(key) {
-  const replies = repliesStore.getters.getReplies();  
+  const replies = repliesStore.getters.getReplies();
+  console.log('delete', replies);
   const replyIndex = replies.findIndex(reply => reply.key === key);
   const newReplies = [
     ...replies.slice(0, replyIndex),
@@ -13,9 +14,9 @@ function deleteReplyByKey(key) {
 }
 
 function addNewReply(reply) {
+  const replies = repliesStore.getters.getReplies();
   const key = uuidv4();
   const newReply = {...reply, key};
-  const replies = repliesStore.getters.getReplies();
   const newReplies = [...replies, newReply];
   repliesStore.setters.setReplies(newReplies);
 }
@@ -35,13 +36,8 @@ function updateReply(updatedReply) {
   repliesStore.setters.setReplies(newReplies);
 }
 
-function sum(a, b) {
-  return a + b;
-}
-
 module.exports = {
   deleteReplyByKey,
   addNewReply,
   updateReply,
-  sum
 };

@@ -1,6 +1,6 @@
 const React = require('react');
 const {PureComponent, PropTypes} = require('react');
-const {View, Button} = require('react-native-ui-lib');
+const {View, Button, Colors} = require('react-native-ui-lib');
 const {connect} = require('remx');
 const {KeyboardRegistry} = require('react-native-keyboard-input');
 const {registeredScreens} = require('../constants/constants');
@@ -51,7 +51,7 @@ const styles = {
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: Colors.dark80
   },
   replyBtn: {
     marginBottom: 20
