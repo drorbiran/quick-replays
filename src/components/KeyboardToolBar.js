@@ -1,6 +1,6 @@
 const React = require('react');
 const {PureComponent, PropTypes} = require('react');
-const {View, TextInput, Button} = require('react-native-ui-lib');
+const {View, TextInput, Button, Colors} = require('react-native-ui-lib');
 
 class KeyboardToolBar extends PureComponent {
 
@@ -23,7 +23,7 @@ class KeyboardToolBar extends PureComponent {
 
     render() {
       return (
-        <View background-black80>
+        <View style={{backgroundColor: Colors.dark80}}>
           <TextInput
             placeholder="Type Your Message"
             onFocus={this.props.onFocus}

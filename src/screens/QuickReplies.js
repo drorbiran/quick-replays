@@ -4,6 +4,7 @@ const {View, Text} = require('react-native-ui-lib');
 const {connect} = require('remx');
 const {KeyboardAccessoryView} = require('react-native-keyboard-input');
 const {registeredScreens} = require('../constants/constants');
+const {ScrollView} = require('react-native');
 
 require('./ReplySelector');
 require('./RepliesEditor');
@@ -54,9 +55,11 @@ class QuickReplies extends PureComponent {
     render() {
       return (
         <View style={styles.container}>
-          <Text center dark10 text60 style={styles.replyText}>
-            {this.props.selectedReply.description}
-          </Text>
+          <ScrollView contentContainerStyle={styles.textContainer}>
+            <Text center dark10 text60 style={styles.replyText}>
+              {this.props.selectedReply.description}
+            </Text>
+          </ScrollView>
           <KeyboardAccessoryView
             renderContent={this.keyboardToolbarContent}
             kbComponent={this.props.keyBoardScreen}
@@ -70,11 +73,14 @@ class QuickReplies extends PureComponent {
 
 const styles = {
   container: {
-    flex: 1,
-    justifyContent: 'space-between'
+    flex: 1
   },
   replyText: {
-    marginTop: 48
+    marginTop: 120
+  },
+  textContainer: {
+    justifyContent:'center', 
+    flex: 1
   }
 };
 
